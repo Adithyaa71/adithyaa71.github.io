@@ -1,0 +1,93 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="fonts.css">
+<style>html,body{margin:0;background:#0E0F11}canvas{display:block}</style>
+<script src="motion.js"></script><script src="film.js"></script>
+<script>
+/* snarevec: three indexes, one embedding model each, never mixed. A query flies into kb_code only;
+   its nearest neighbours light up; a 1024-wide vector bounces off the 768 space (dimensions are probed, not typed). */
+const rnd = M.seeded(7);
+const g = () => { let u = 0; for (let i = 0; i < 4; i++) u += rnd(); return (u - 2) / 2; };      // ~gaussian
+const CL = [
+  { name: 'kb_text · 768d', col: [95, 211, 230], c: [-330, -40, 40] },
+  { name: 'kb_code · 768d', col: [255, 209, 46], c: [40, 30, -40] },
+  { name: 'kb_images · 512d CLIP', col: [236, 232, 223], c: [360, -60, 120] },
+];
+const PTS = []; CL.forEach((k, ci) => { for (let i = 0; i < 300; i++) PTS.push({ ci, x: k.c[0] + g() * 150, y: k.c[1] + g() * 110, z: k.c[2] + g() * 150 }); });
+const Q_END = [CL[1].c[0] + 10, CL[1].c[1] - 6, CL[1].c[2] + 4];
+const NN = PTS.map((p, i) => ({ i, d: Math.hypot(p.x - Q_END[0], p.y - Q_END[1], p.z - Q_END[2]) })).filter((o) => PTS[o.i].ci === 1).sort((a, b) => a.d - b.d).slice(0, 9);
+Film({
+  frames: 240,
+  stage: { l: { x: 560, y: 140, w: 1000 }, p: { x: -150, y: 560, w: 1000 } },
+  draw(c, f, U) {
+    const { P, S, iv, ss, txt } = U;
+    const th = -0.5 + f * 0.0042;                                       // the orbit
+    const push = S(f, 70, 'gentle') * 0.9 - S(f, 168, 'gentle') * 0.35;   // dolly toward kb_code, then back a little
+    const cx = M.lerp(0, CL[1].c[0], push), cy = M.lerp(0, CL[1].c[1], push), D = 1250 - 520 * push;
+    const proj = (x, y, z) => {
+      const X = x - cx, Y = y - cy, Z = z - CL[1].c[2] * push;
+      const rx = X * Math.cos(th) - Z * Math.sin(th), rz = X * Math.sin(th) + Z * Math.cos(th);
+      const s = 900 / (rz + D);
+      return { x: 500 + rx * s, y: 310 + Y * s, s, z: rz };
+    };
+    const focus = iv(f, 100, 140) * (1 - iv(f, 220, 240) * 0.3);
+    // floor grid for depth
+    c.strokeStyle = 'rgba(236,232,223,.05)';
+    for (let i = -6; i <= 6; i++) {
+      const a = proj(i * 120, 260, -720), b = proj(i * 120, 260, 720); c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke();
+      const d = proj(-720, 260, i * 120), e = proj(720, 260, i * 120); c.beginPath(); c.moveTo(d.x, d.y); c.lineTo(e.x, e.y); c.stroke();
+    }
+    // points, far to near
+    const order = PTS.map((p, i) => ({ i, q: proj(p.x, p.y, p.z) })).sort((a, b) => b.q.z - a.q.z);
+    const appear = (i) => S(f, 4 + (i % 300) * 0.12 + PTS[i].ci * 8, 'smooth');
+    order.forEach(({ i, q }) => {
+      const p = PTS[i], k = CL[p.ci], a0 = appear(i);
+      const dim = p.ci === 1 ? 1 : 1 - 0.75 * focus;
+      const fog = M.clamp(1.4 - (q.z + D) / 1800);
+      c.globalAlpha = a0 * dim * (0.35 + 0.65 * fog);
+      c.fillStyle = `rgb(${k.col})`; c.beginPath(); c.arc(q.x, q.y, Math.max(0.6, 2.4 * q.s), 0, 7); c.fill();
+    });
+    c.globalAlpha = 1;
+    // labels, projected and kept upright
+    CL.forEach((k, ci) => {
+      const q = proj(k.c[0], k.c[1] - (ci === 2 ? 280 : ci === 0 ? 240 : 200), k.c[2]);
+      const a = iv(f, 20 + ci * 6, 40 + ci * 6) * (ci === 1 ? 1 : 1 - 0.6 * focus);
+      txt(c, k.name, q.x, q.y, { size: 15, align: 'center', color: `rgb(${k.col})`, alpha: a, weight: 500 });
+    });
+    // the query comet, with a trail
+    if (f > 40) {
+      const tq = ss(iv(f, 44, 118));
+      const at = (t) => [M.lerp(-700, Q_END[0], t), M.lerp(-420, Q_END[1], t) - Math.sin(Math.PI * t) * 120, M.lerp(-300, Q_END[2], t)];
+      for (let j = 14; j >= 0; j--) {
+        const t = Math.max(0, tq - j * 0.018), [x, y, z] = at(t), q = proj(x, y, z);
+        c.globalAlpha = (1 - j / 15) * 0.9 * iv(f, 42, 52); c.fillStyle = '#FFFFFF'; c.beginPath(); c.arc(q.x, q.y, (4.5 - j * 0.25) * q.s * 1.4, 0, 7); c.fill();
+      }
+      c.globalAlpha = 1;
+      const [x, y, z] = at(tq), q = proj(x, y, z);
+      if (f < 120) txt(c, '"where does the gate read confidence?"', q.x + 18, q.y - 10, { size: 13, color: P.bone, alpha: iv(f, 48, 56) });
+      // nearest neighbours: lines snap out on springs
+      NN.forEach((n, j) => {
+        const s = S(f, 120 + j * 3, 'snappy'); if (s <= 0.01) return;
+        const p = PTS[n.i], b = proj(p.x, p.y, p.z);
+        c.strokeStyle = `rgba(255,209,46,${0.85 * Math.min(1, s)})`; c.lineWidth = 1.4;
+        c.beginPath(); c.moveTo(q.x, q.y); c.lineTo(M.lerp(q.x, b.x, Math.min(1, s)), M.lerp(q.y, b.y, Math.min(1, s))); c.stroke();
+        c.beginPath(); c.arc(b.x, b.y, 5 * b.s * 1.4 * Math.min(1, s), 0, 7); c.fillStyle = P.sig; c.fill();
+      });
+      c.lineWidth = 1;
+      if (f > 132) txt(c, '→ top-9 from kb_code only · group = kratos', 20, 566, { size: 13.5, color: P.sig, alpha: iv(f, 132, 140) });
+    }
+    // the wrong-width vector: hits the membrane of kb_code and bounces off (a damped spring, not an easing curve)
+    if (f > 168) {
+      const ctr = proj(CL[1].c[0], CL[1].c[1], CL[1].c[2]), R = 250 * ctr.s;
+      const t = f - 168, hit = 22;
+      let d;                                                           // distance outside the membrane
+      if (t < hit) d = (1 - t / hit) * 520;
+      else d = 140 * (1 - Math.exp(-(t - hit) / 9)) + Math.exp(-(t - hit) / 6) * Math.sin((t - hit) / 2.5) * -18;
+      const ang = 2.6, px = ctr.x + Math.cos(ang) * (R + d), py = ctr.y + Math.sin(ang) * (R + d);
+      const hitA = t >= hit ? Math.exp(-(t - hit) / 10) : 0;
+      c.beginPath(); c.arc(ctr.x, ctr.y, R, 0, 7); c.strokeStyle = `rgba(255,90,78,${0.15 + 0.7 * hitA})`; c.lineWidth = 1 + 3 * hitA; c.stroke(); c.lineWidth = 1;
+      c.beginPath(); c.arc(px, py, 9, 0, 7); c.fillStyle = P.red; c.fill();
+      txt(c, '1024d', px, py - 16, { size: 13, align: 'center', color: P.red, weight: 500 });
+      if (t > hit) txt(c, 'dimension mismatch: 1024 ≠ 768 · refused', 20, 600, { size: 13.5, color: P.red, alpha: iv(t, hit, hit + 6) });
+    }
+  },
+});
+</script>

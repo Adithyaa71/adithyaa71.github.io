@@ -1,0 +1,89 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="fonts.css">
+<style>html,body{margin:0;background:#0E0F11}canvas{display:block}</style>
+<script src="motion.js"></script><script src="film.js"></script>
+<script>
+/* bluee-harness: memory is a projection of one append-only log. Events ride a tape into the reducer (a prism),
+   which splits them into a vector field and a graph. Then the derived side is wiped and rebuilt from the tape alone. */
+const KINDS = [['session_start', '#ECE8DF'], ['user_message', '#5FD3E6'], ['tool_call', '#FFD12E'], ['tool_result', '#7BE495'], ['assistant_reply', '#ECE8DF']];
+const EV = Array.from({ length: 14 }, (_, i) => ({ seq: i + 1, kind: KINDS[i % 5][0], col: KINDS[i % 5][1] }));
+const PRISM = { x: 470, y: 310 };
+const rnd = M.seeded(42);
+const PTS = Array.from({ length: 170 }, () => ({ x: 640 + rnd() * 330, y: 64 + rnd() * 220, s: 1.6 + rnd() * 3, seq: 1 + Math.floor(rnd() * 14) }));
+const NODES = Array.from({ length: 11 }, (_, i) => ({ x: 650 + (i % 4) * 92 + rnd() * 30, y: 400 + Math.floor(i / 4) * 66 + rnd() * 20, seq: 1 + i, r: 8 + rnd() * 8 }));
+const EDGES = [[0, 1], [1, 2], [2, 6], [1, 5], [5, 6], [3, 7], [6, 7], [4, 5], [8, 9], [9, 5], [9, 10], [2, 3]];
+Film({
+  frames: 210,
+  stage: { l: { x: 590, y: 150, w: 980 }, p: { x: -10, y: 600, w: 740 } },
+  draw(c, f, U) {
+    const { P, S, iv, rr, txt } = U;
+    // seq read so far: the tape advances; the reducer has "seen" events up to `seen`
+    const tapeX = (i) => 40 + i * 118 - f * 3.1;                      // each event card moves left→right? no: toward the prism
+    const wipe = S(f, 128, 'snappy') ;                                  // derived layers cleared
+    const rebuild = iv(f, 146, 196);                                   // replayed from the log
+    const seenLive = Math.floor(iv(f, 10, 120) * 14);
+    const seen = f < 128 ? seenLive : Math.floor(rebuild * 14);
+
+    // the tape (truth): never cleared
+    c.save();
+    rr(c, -40, 282, PRISM.x + 20, 56, 10); c.fillStyle = 'rgba(236,232,223,.03)'; c.fill();
+    txt(c, 'events.jsonl · append-only', 0, 266, { size: 13, color: P.dim });
+    EV.forEach((e, i) => {
+      const x = PRISM.x - 120 - (i - (f < 128 ? iv(f, 10, 120) : rebuild) * 14) * 118;
+      if (x < -140 || x > PRISM.x - 10) return;
+      const a = M.clamp((x + 140) / 120) * M.clamp((PRISM.x - 70 - (x + 108)) / 30);
+      c.globalAlpha = a;
+      rr(c, x, 290, 108, 40, 8); c.fillStyle = '#1A1C21'; c.fill(); c.strokeStyle = e.col; c.globalAlpha = a * 0.6; c.stroke(); c.globalAlpha = a;
+      txt(c, `#${e.seq}`, x + 10, 306, { size: 11, color: P.faint });
+      txt(c, e.kind, x + 10, 322, { size: 11.5, color: e.col });
+    });
+    c.restore();
+
+    // the prism (the reducer), with a slow breath and a flash on each event
+    const flash = (f < 128 ? (f - 10) % 8 < 2 : f > 146 && (f - 146) % 4 < 2) ? 1 : 0;
+    c.save(); c.translate(PRISM.x, PRISM.y);
+    c.beginPath(); c.moveTo(0, -70); c.lineTo(62, 50); c.lineTo(-62, 50); c.closePath();
+    const g = c.createLinearGradient(-60, -70, 60, 50); g.addColorStop(0, 'rgba(95,211,230,.30)'); g.addColorStop(1, 'rgba(255,209,46,.22)');
+    c.fillStyle = g; c.fill(); c.strokeStyle = flash ? P.bone : 'rgba(236,232,223,.5)'; c.lineWidth = flash ? 2 : 1.2; c.stroke(); c.lineWidth = 1;
+    txt(c, 'reduce', 0, 26, { size: 13, align: 'center', color: P.bone, weight: 500 });
+    c.restore();
+    // beams out of the prism
+    const beamA = f < 128 ? iv(f, 14, 30) : rebuild > 0 ? 1 : 0;
+    c.save(); c.globalAlpha = 0.5 * beamA;
+    c.strokeStyle = P.cyan; c.beginPath(); c.moveTo(PRISM.x + 30, PRISM.y - 18); c.lineTo(640, 160); c.stroke();
+    c.strokeStyle = P.sig; c.beginPath(); c.moveTo(PRISM.x + 40, PRISM.y + 30); c.lineTo(640, 450); c.stroke();
+    c.restore();
+
+    // derived: vectors (384-dim, drawn as a field) and the graph
+    const dAlpha = 1 - wipe * (1 - iv(f, 146, 150));
+    txt(c, 'vectors · 384-dim', 640, 44, { size: 13, color: P.cyan, alpha: 0.9 });
+    txt(c, 'graph · Kuzu', 640, 384, { size: 13, color: P.sig, alpha: 0.9 });
+    PTS.forEach((p, i) => {
+      if (p.seq > seen) return;
+      const born = f < 128 ? 10 + (p.seq / 14) * 110 : 146 + (p.seq / 14) * 50;
+      const s = S(f, born, 'bouncy');
+      c.globalAlpha = dAlpha * Math.min(1, s);
+      c.beginPath(); c.arc(p.x, p.y, p.s * s, 0, 7); c.fillStyle = P.cyan; c.fill();
+    });
+    c.globalAlpha = 1;
+    EDGES.forEach(([a, b]) => {
+      const A = NODES[a], B = NODES[b]; if (A.seq > seen || B.seq > seen) return;
+      c.globalAlpha = dAlpha * 0.5; c.strokeStyle = P.sig; c.beginPath(); c.moveTo(A.x, A.y); c.lineTo(B.x, B.y); c.stroke();
+    });
+    NODES.forEach((n) => {
+      if (n.seq > seen) return;
+      const born = f < 128 ? 10 + (n.seq / 14) * 110 : 146 + (n.seq / 14) * 50;
+      const s = S(f, born, 'bouncy');
+      c.globalAlpha = dAlpha; c.beginPath(); c.arc(n.x, n.y, n.r * s, 0, 7); c.fillStyle = '#16181C'; c.fill(); c.strokeStyle = P.sig; c.lineWidth = 1.6; c.stroke(); c.lineWidth = 1;
+    });
+    c.globalAlpha = 1;
+
+    // the wipe: a bar sweeps the derived side clean; the tape is untouched
+    if (f > 124 && f < 146) {
+      const x = 600 + iv(f, 126, 142) * 420;
+      c.fillStyle = P.red; c.fillRect(x, 30, 3, 570);
+      txt(c, 'rm vectors/ graph/', 600, 610, { size: 13, color: P.red, alpha: iv(f, 124, 128) * (1 - iv(f, 142, 146)) });
+    }
+    if (f > 146) txt(c, `bluee reduce · rebuilt ${seen}/14 events from the log`, 470, 610, { size: 13, color: f > 196 ? P.green : P.bone, alpha: iv(f, 146, 152) });
+  },
+});
+</script>

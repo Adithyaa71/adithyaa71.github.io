@@ -1,0 +1,136 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="fonts.css">
+<style>html,body{margin:0;background:#0E0F11}canvas{display:block}</style>
+<script src="motion.js"></script><script src="film.js"></script>
+<script>
+/* kratos: the gate takes the WEAKER confidence. 0.99 / 0.61 are the values from kratos-decide's own unit test
+   (lib.rs:184). It refuses; then a clear target passes; it acts; a frame diff proves the screen changed. */
+const DEL = { x: 600, y: 468, w: 140, h: 46 }, SEND = { x: 762, y: 468, w: 140, h: 46 };
+function cursorAt(f, S) {
+  const p0 = { x: 1120, y: 720 }, p1 = { x: DEL.x + 70, y: DEL.y + 24 }, p2 = { x: SEND.x + 70, y: SEND.y + 24 };
+  const a = S(f, 8, 'gentle'), b = S(f, 124, 'smooth');
+  let x = p0.x + (p1.x - p0.x) * a, y = p0.y + (p1.y - p0.y) * a - Math.sin(Math.PI * Math.min(1, a)) * 90;
+  // the refusal shoves the hand back: a damped kick
+  const kick = f > 108 ? Math.exp(-(f - 108) / 6) * Math.sin((f - 108) / 2.2) * 18 : 0;
+  x += (p2.x - p1.x) * b + kick; y += (p2.y - p1.y) * b - Math.sin(Math.PI * Math.min(1, b)) * 40;
+  const press = f > 186 && f < 196 ? 0.86 : 1;
+  return { x, y, press };
+}
+function drawCursor(c, x, y, s, P) {
+  c.save(); c.translate(x, y); c.scale(s * 1.25, s * 1.25);
+  c.beginPath(); c.moveTo(0, 0); c.lineTo(0, 26); c.lineTo(7, 20); c.lineTo(12, 31); c.lineTo(17, 29); c.lineTo(12, 18); c.lineTo(21, 18); c.closePath();
+  c.fillStyle = P.sig; c.fill(); c.lineWidth = 1.6; c.strokeStyle = '#0E0F11'; c.stroke(); c.restore();
+}
+function gate(c, f, x, y, rows, { P, S, rr, txt }, a) {
+  if (a <= 0) return;
+  c.save(); c.globalAlpha = a; c.translate(x, y);
+  rr(c, 0, 0, 300, 176, 14); c.fillStyle = 'rgba(22,24,28,.96)'; c.fill(); c.strokeStyle = P.line2; c.lineWidth = 1; c.stroke();
+  txt(c, 'kratos-decide · gate', 18, 28, { size: 12.5, color: P.dim });
+  const bx = 92, bw = 186, thr = 0.70;
+  rows.forEach((r, i) => {
+    const yy = 52 + i * 34, p = S(f, r.at, 'snappy');
+    txt(c, r.k, 18, yy + 12, { size: 13, color: r.min ? P.bone : P.dim, weight: r.min ? 500 : 400 });
+    rr(c, bx, yy + 2, bw, 10, 5); c.fillStyle = 'rgba(236,232,223,.07)'; c.fill();
+    rr(c, bx, yy + 2, Math.max(0.01, bw * r.v * p), 10, 5); c.fillStyle = r.min ? (r.v < thr ? P.red : P.sig) : 'rgba(236,232,223,.42)'; c.fill();
+    txt(c, (r.v * p).toFixed(2), bx + bw, yy - 4, { size: 11.5, align: 'right', color: P.dim });
+  });
+  c.strokeStyle = P.bone; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(bx + bw * thr, 44); c.lineTo(bx + bw * thr, 148); c.stroke(); c.setLineDash([]);
+  txt(c, '0.70', bx + bw * thr, 162, { size: 11, align: 'center', color: P.faint });
+  c.restore();
+}
+Film({
+  frames: 240,
+  stage: { l: { x: 600, y: 150, w: 960 }, p: { x: -250, y: 560, w: 980 } },
+  bg: (c, f, W, H, P) => {
+    c.strokeStyle = 'rgba(236,232,223,.035)'; c.lineWidth = 1;
+    for (let x = 0; x < W; x += 40) { c.beginPath(); c.moveTo(x + .5, 0); c.lineTo(x + .5, H); c.stroke(); }
+    for (let y = 0; y < H; y += 40) { c.beginPath(); c.moveTo(0, y + .5); c.lineTo(W, y + .5); c.stroke(); }
+  },
+  draw(c, f, U) {
+    const { P, S, iv, rr, txt } = U;
+    const bell = (a, b, c2, d2) => S(f, a, 'gentle') - S(f, c2, 'gentle');
+    const z = 1 + 0.2 * bell(46, 0, 124) + 0.1 * (S(f, 150, 'gentle') - S(f, 200, 'gentle')) + 0.06 * S(f, 222, 'gentle');
+    const fx = 900, fy = 300;
+    c.translate(fx, fy); c.scale(z, z); c.translate(-fx, -fy);
+    // the desktop the agent is driving
+    const enter = S(f, 0, 'gentle');
+    c.save(); c.globalAlpha = enter; c.translate(0, (1 - enter) * 40);
+    rr(c, 40, 30, 920, 560, 18); c.fillStyle = P.bg2; c.fill(); c.strokeStyle = P.line2; c.stroke();
+    rr(c, 40, 30, 920, 44, [18, 18, 0, 0]); c.fillStyle = '#1B1E23'; c.fill();
+    ['#3a3d44', '#3a3d44', '#3a3d44'].forEach((col, i) => { c.beginPath(); c.arc(66 + i * 20, 52, 6, 0, 7); c.fillStyle = col; c.fill(); });
+    txt(c, 'Mail · compose', 500, 57, { size: 13, align: 'center', color: P.dim });
+    // sidebar: the sent list. A new row lands after the click.
+    c.fillStyle = 'rgba(236,232,223,.03)'; c.fillRect(40, 74, 230, 516);
+    txt(c, 'SENT', 64, 108, { size: 11, color: P.faint });
+    const land = S(f, 198, 'bouncy');
+    const rows = ['weekly report → ops', 'invoice #0412', 'standup notes'];
+    rows.forEach((r, i) => {
+      const yy = 128 + i * 58 + land * 58;
+      rr(c, 58, yy, 194, 46, 9); c.fillStyle = 'rgba(236,232,223,.05)'; c.fill();
+      txt(c, r, 72, yy + 28, { size: 12.5, color: P.dim });
+    });
+    if (f > 196) {
+      c.save(); c.globalAlpha = Math.min(1, land * 1.4);
+      rr(c, 58, 128 - (1 - land) * 40, 194, 46, 9); c.fillStyle = 'rgba(255,209,46,.14)'; c.fill(); c.strokeStyle = 'rgba(255,209,46,.5)'; c.stroke();
+      txt(c, 'stock report → ops', 72, 156 - (1 - land) * 40, { size: 12.5, color: P.bone });
+      c.restore();
+    }
+    // composer
+    const cleared = f > 196 ? S(f, 196, 'snappy') : 0;
+    txt(c, 'To   ops@company', 310, 120, { size: 13, color: P.dim });
+    c.fillStyle = P.line; c.fillRect(300, 136, 630, 1);
+    c.save(); c.globalAlpha = 1 - cleared;
+    ['Hi team,', "this week's stock report is attached.", '— sent by the agent'].forEach((l, i) => txt(c, l, 310, 178 + i * 30, { size: 14, color: P.bone }));
+    rr(c, 310, 290, 220, 54, 8); c.strokeStyle = P.line2; c.stroke(); txt(c, 'stock-week-46.xlsx', 326, 322, { size: 12, color: P.dim });
+    c.restore();
+    // buttons
+    const cur = cursorAt(f, S);
+    const hoverDel = f > 50 && f < 128, hoverSend = f > 150;
+    rr(c, DEL.x, DEL.y, DEL.w, DEL.h, 10); c.strokeStyle = hoverDel ? P.red : 'rgba(255,90,78,.5)'; c.lineWidth = hoverDel ? 2 : 1; c.stroke(); c.lineWidth = 1;
+    txt(c, 'Delete all', DEL.x + 70, DEL.y + 29, { size: 14, align: 'center', color: '#FF8D85', font: 'IBM Plex Sans', weight: 500 });
+    const pr = f > 186 && f < 196 ? 0.95 : 1;
+    c.save(); c.translate(SEND.x + 70, SEND.y + 23); c.scale(pr, pr);
+    rr(c, -70, -23, SEND.w, SEND.h, 10); c.fillStyle = hoverSend ? P.sig : 'rgba(255,209,46,.85)'; c.fill();
+    txt(c, 'Send', 0, 6, { size: 15, align: 'center', color: '#141414', font: 'IBM Plex Sans', weight: 600 });
+    c.restore();
+    c.restore();
+
+    // ── gate #1: the wrong target. min(0.99, 0.61) = 0.61 < 0.70 → refuse
+    const g1 = iv(f, 52, 60) * (1 - iv(f, 120, 128));
+    const shake = f > 100 ? Math.exp(-(f - 100) / 7) * Math.sin((f - 100) * 1.7) * 9 : 0;
+    gate(c, f, 610 + shake, 200, [{ k: 'kind', v: 0.99, at: 56 }, { k: 'target', v: 0.61, at: 60 }, { k: 'min', v: 0.61, at: 66, min: true }], U, g1);
+    if (f > 98 && f < 128) {
+      c.save(); c.globalAlpha = iv(f, 98, 102) * (1 - iv(f, 120, 128));
+      txt(c, 'REFUSED · 0.61 < 0.70', 628 + shake, 400, { size: 15, weight: 500, color: P.red });
+      c.restore();
+    }
+    // ── gate #2: a clear target passes
+    const g2 = iv(f, 150, 158) * (1 - iv(f, 196, 204));
+    gate(c, f, 610, 200, [{ k: 'kind', v: 0.98, at: 152 }, { k: 'target', v: 0.94, at: 155 }, { k: 'min', v: 0.94, at: 159, min: true }], U, g2);
+    if (f > 178 && f < 204) txt(c, 'ACT · 0.94 ≥ 0.70', 628, 400, { size: 15, weight: 500, color: P.sig, alpha: iv(f, 178, 182) * (1 - iv(f, 196, 204)) });
+
+    // click ripple
+    if (f > 188 && f < 214) {
+      const r = (f - 188) * 4.2;
+      c.beginPath(); c.arc(SEND.x + 70, SEND.y + 23, r, 0, 7); c.strokeStyle = `rgba(255,209,46,${0.8 * (1 - (f - 188) / 26)})`; c.lineWidth = 2; c.stroke(); c.lineWidth = 1;
+    }
+    drawCursor(c, cur.x, cur.y, cur.press, P);
+
+    // ── evidence: a scanline compares before/after; changed cells light up
+    if (f > 204) {
+      const y = 74 + iv(f, 206, 226) * 516;
+      const changed = (cx, cy) => (cx > 300 && cx < 930 && cy > 150 && cy < 350) || (cx > 56 && cx < 254 && cy > 124 && cy < 360);
+      for (let cy = 80; cy < Math.min(y, 588); cy += 12) for (let cx = 48; cx < 952; cx += 12) {
+        if (!changed(cx, cy)) continue;
+        c.fillStyle = 'rgba(255,209,46,.30)'; c.fillRect(cx, cy, 10, 10);
+      }
+      if (f < 228) { c.fillStyle = P.sig; c.fillRect(40, y, 920, 2); c.fillStyle = 'rgba(255,209,46,.12)'; c.fillRect(40, y - 26, 920, 26); }
+      const a = iv(f, 224, 232);
+      if (a > 0) {
+        rr(c, 600, 520, 340, 56, 12); c.fillStyle = `rgba(14,15,17,${0.94 * a})`; c.fill(); c.strokeStyle = `rgba(255,209,46,${a})`; c.stroke();
+        txt(c, 'frame diff > 0.004 · screen changed', 618, 543, { size: 12.5, color: P.bone, alpha: a });
+        txt(c, 'status: executed · evidence attached', 618, 564, { size: 12.5, color: P.sig, alpha: a });
+      }
+    }
+  },
+});
+</script>

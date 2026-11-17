@@ -1,0 +1,76 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="fonts.css">
+<style>html,body{margin:0;background:#0E0F11}canvas{display:block}</style>
+<script src="motion.js"></script><script src="film.js"></script>
+<script>
+/* nyx-nvim: an agent edits a live Neovim buffer over MCP. read_buffer first; then edit_buffer with a 1-indexed,
+   inclusive range, which the bridge turns into one 0-indexed slice: buf[start - 1 : end] (mcp_client.py:139); then :w.
+   The file being edited is an example. */
+const FILE = ['from dataclasses import dataclass', '', 'THRESHOLD = 0.70', '', '@dataclass', 'class Reading:', '    kind: float', '    target: float', '', '',
+  'def decide(r: Reading) -> bool:', '    # the average looks fine, and is wrong', '    score = (r.kind + r.target) / 2', '    return score >= THRESHOLD', '', ''];
+const NEW = ['    # the weakest signal decides', '    score = min(r.kind, r.target)', '    return score >= THRESHOLD'];
+const CALL1 = 'read_buffer(path="gate.py")';
+const CALL2 = ['edit_buffer(', '  start_line=12, end_line=14,', '  new_lines=[ …3 lines… ],', '  path="gate.py")'];
+function hl(c, s, x, y, txt, P) {   // tiny python highlighter for the buffer
+  const kw = /\b(from|import|def|class|return|min)\b/g;
+  let out = [], last = 0, m;
+  const push = (t, col) => out.push([t, col]);
+  if (s.trim().startsWith('#')) { txt(c, s, x, y, { size: 16, color: '#8b93a0' }); return; }
+  while ((m = kw.exec(s))) { push(s.slice(last, m.index), P.bone); push(m[0], m[0] === 'min' ? P.cyan : P.sig); last = m.index + m[0].length; }
+  push(s.slice(last), P.bone);
+  c.font = `400 ${16 * (window.FILM_TK || 1)}px "IBM Plex Mono"`; let xx = x;
+  out.forEach(([t, col]) => { txt(c, t, xx, y, { size: 16, color: /\d/.test(t) && col === P.bone ? P.bone : col }); xx += c.measureText(t).width; });
+}
+Film({
+  frames: 190,
+  stage: { l: { x: 600, y: 150, w: 960 }, p: { x: -8, y: 560, w: 736 } },
+  draw(c, f, U) {
+    const { P, S, iv, rr, txt } = U;
+    // ── the agent's side: MCP calls typing themselves
+    rr(c, 0, 20, 330, 560, 16); c.fillStyle = '#121418'; c.fill(); c.strokeStyle = P.line2; c.stroke();
+    txt(c, 'agent → MCP', 22, 52, { size: 13, color: P.dim });
+    txt(c, M.typed(CALL1, f, { start: 0, cps: 60 }), 22, 92, { size: 13.5, color: P.cyan });
+    if (f > 34) txt(c, '← 16 lines', 22, 116, { size: 12.5, color: P.faint, alpha: iv(f, 34, 40) });
+    CALL2.forEach((l, i) => txt(c, M.typed(l, f, { start: 56 + i * 9, cps: 46 }), 22, 168 + i * 26, { size: 13.5, color: i ? P.bone : P.sig }));
+    if (f > 168) txt(c, '← ok · written', 22, 290, { size: 12.5, color: P.green, alpha: iv(f, 168, 174) });
+
+    // ── Neovim
+    const X = 360, Y = 20, LH = 30;
+    rr(c, X, Y, 640, 560, 16); c.fillStyle = '#16181C'; c.fill(); c.strokeStyle = P.line2; c.stroke();
+    txt(c, 'gate.py', X + 22, Y + 30, { size: 13, color: P.dim });
+    const read = iv(f, 30, 46);                                      // read_buffer sweeps the file
+    const range = iv(f, 96, 104), conv = S(f, 108, 'smooth'), swap = S(f, 128, 'smooth'), settle = S(f, 136, 'bouncy');
+    FILE.forEach((l, i) => {
+      const n = i + 1, y = Y + 68 + i * LH;
+      const inR = n >= 12 && n <= 14;
+      if (inR && range > 0) { c.fillStyle = `rgba(255,209,46,${0.12 * range})`; c.fillRect(X + 1, y - 21, 638, LH); c.fillStyle = `rgba(255,209,46,${range})`; c.fillRect(X + 1, y - 21, 3, LH); }
+      if (read > 0 && read < 1 && Math.abs(i - read * 16) < 1) { c.fillStyle = 'rgba(95,211,230,.18)'; c.fillRect(X + 1, y - 21, 638, LH); }
+      txt(c, String(n).padStart(2, ' '), X + 40, y, { size: 14, align: 'right', color: inR && range ? P.sig : '#4f5968' });
+      if (inR && f > 120) {
+        const k = n - 12;
+        // old line slides out, new line drops in
+        c.save(); c.beginPath(); c.rect(X + 56, y - 21, 580, LH); c.clip();
+        txt(c, l, X + 60 - swap * 60, y, { size: 16, color: P.red, alpha: 1 - swap });
+        if (swap > 0.05) hl(c, NEW[k], X + 60, y + (1 - settle) * -26, txt, P);
+        c.restore();
+      } else hl(c, l, X + 60, y, txt, P);
+    });
+    // the index conversion: "12–14 (1-indexed, inclusive)" becomes "buf[11 : 14]"
+    if (f > 100) {
+      const a = iv(f, 100, 106) * (1 - iv(f, 150, 160));
+      const bx = 16, by = 330;
+      rr(c, bx, by, 298, 84, 12); c.fillStyle = `rgba(14,15,17,${0.95 * a})`; c.fill(); c.strokeStyle = `rgba(255,209,46,${a})`; c.stroke();
+      txt(c, 'lines 12–14, 1-indexed, inclusive', bx + 16, by + 28, { size: 12.5, color: P.dim, alpha: a });
+      const s = Math.round(M.lerp(12, 11, Math.min(1, conv)));
+      txt(c, `buf[${s} : 14] = new_lines`, bx + 16, by + 60, { size: 17, color: P.sig, alpha: a, weight: 500 });
+      if (conv > 0.2) txt(c, '−1', bx + 76, by + 60 - 22 * conv, { size: 12, color: P.cyan, alpha: a * (1 - iv(f, 126, 134)) });
+    }
+    // statusline
+    const w = f > 160;
+    c.fillStyle = '#1D2026'; c.fillRect(X + 1, Y + 520, 638, 38);
+    rr(c, X + 1, Y + 520, 92, 38, [0, 0, 0, 15]); c.fillStyle = w ? P.green : P.cyan; c.fill();
+    txt(c, w ? 'WRITE' : 'NORMAL', X + 47, Y + 545, { size: 13, align: 'center', color: '#0E0F11', weight: 500 });
+    txt(c, w ? '"gate.py" 16L written' : 'gate.py', X + 110, Y + 545, { size: 13, color: w ? P.green : P.dim });
+    if (f > 154 && f < 166) txt(c, ':w', X + 600, Y + 545, { size: 14, color: P.bone, align: 'right' });
+  },
+});
+</script>
