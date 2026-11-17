@@ -44,7 +44,7 @@
     const name = w.dataset.reel, cv = q('canvas', w), c = cv.getContext('2d');
     const N = +w.dataset.n || 0;
     const imgs = []; let on = false, i = 0, acc = 0, started = false;
-    const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); cv.width = Math.max(1, Math.round(r.width * d)); cv.height = Math.max(1, Math.round(r.height * d)); if (imgs[i]) draw(imgs[i]); };
+    const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 3); cv.width = Math.max(1, Math.round(r.width * d)); cv.height = Math.max(1, Math.round(r.height * d)); if (imgs[i]) draw(imgs[i]); };
     const draw = (im) => { if (im && im.__ok) c.drawImage(im, 0, 0, cv.width, cv.height); };
     size(); addEventListener('resize', size);
     const start = () => { if (started) return; started = true; for (let j = 0; j < N; j++) imgs[j] = loadImg(`frames/${name}/t/${String(j).padStart(3, '0')}.webp`, j === 0 ? draw : null); };
@@ -80,7 +80,7 @@
     unload() { this.imgs.forEach((im) => { if (im) { im.onload = null; im.src = ''; } }); this.imgs = []; this.started = false; this.cur = -1; }
     ok(i) { const im = this.imgs[i]; return im && im.__ok; }
     size() {
-      const r = this.cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
+      const r = this.cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 3);
       this.cv.width = Math.max(1, Math.round(r.width * d)); this.cv.height = Math.max(1, Math.round(r.height * d));
       const o = narrow() ? 'p' : 'l'; if (o !== this.o) { this.o = o; this.unload(); if (this.near) this.loadAll(); }
       this.cur = -1; this.draw(this.want, true);
