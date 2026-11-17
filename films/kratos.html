@@ -26,12 +26,16 @@ function gate(c, f, x, y, rows, { P, S, rr, txt }, a) {
   rr(c, 0, 0, 300, 176, 14); c.fillStyle = 'rgba(22,24,28,.96)'; c.fill(); c.strokeStyle = P.line2; c.lineWidth = 1; c.stroke();
   txt(c, 'kratos-decide · gate', 18, 28, { size: 12.5, color: P.dim });
   const bx = 92, bw = 186, thr = 0.70;
+  const shown = rows.map((r) => r.v * S(f, r.at, 'snappy'));
   rows.forEach((r, i) => {
-    const yy = 52 + i * 34, p = S(f, r.at, 'snappy');
+    const yy = 52 + i * 34;
+    // min is never animated on its own: it is min() of the two values on screen, so no frame can contradict itself
+    const val = r.min ? Math.min(shown[0], shown[1]) : shown[i], p = r.v ? val / r.v : 0;
+    if (r.min && f < r.at) return;                                    // min appears once, already equal to min() of what is on screen
     txt(c, r.k, 18, yy + 12, { size: 13, color: r.min ? P.bone : P.dim, weight: r.min ? 500 : 400 });
     rr(c, bx, yy + 2, bw, 10, 5); c.fillStyle = 'rgba(236,232,223,.07)'; c.fill();
     rr(c, bx, yy + 2, Math.max(0.01, bw * r.v * p), 10, 5); c.fillStyle = r.min ? (r.v < thr ? P.red : P.sig) : 'rgba(236,232,223,.42)'; c.fill();
-    txt(c, (r.v * p).toFixed(2), bx + bw, yy - 4, { size: 11.5, align: 'right', color: P.dim });
+    txt(c, val.toFixed(2), bx + bw, yy - 4, { size: 11.5, align: 'right', color: P.dim });
   });
   c.strokeStyle = P.bone; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(bx + bw * thr, 44); c.lineTo(bx + bw * thr, 148); c.stroke(); c.setLineDash([]);
   txt(c, '0.70', bx + bw * thr, 162, { size: 11, align: 'center', color: P.faint });
@@ -39,7 +43,7 @@ function gate(c, f, x, y, rows, { P, S, rr, txt }, a) {
 }
 Film({
   frames: 240,
-  stage: { l: { x: 600, y: 150, w: 960 }, p: { x: -250, y: 560, w: 980 } },
+  stage: { l: { x: 600, y: 150, w: 960 }, p: { x: 12, y: 600, w: 696 } },
   bg: (c, f, W, H, P) => {
     c.strokeStyle = 'rgba(236,232,223,.035)'; c.lineWidth = 1;
     for (let x = 0; x < W; x += 40) { c.beginPath(); c.moveTo(x + .5, 0); c.lineTo(x + .5, H); c.stroke(); }
@@ -126,9 +130,9 @@ Film({
       if (f < 228) { c.fillStyle = P.sig; c.fillRect(40, y, 920, 2); c.fillStyle = 'rgba(255,209,46,.12)'; c.fillRect(40, y - 26, 920, 26); }
       const a = iv(f, 224, 232);
       if (a > 0) {
-        rr(c, 600, 520, 340, 56, 12); c.fillStyle = `rgba(14,15,17,${0.94 * a})`; c.fill(); c.strokeStyle = `rgba(255,209,46,${a})`; c.stroke();
-        txt(c, 'frame diff > 0.004 · screen changed', 618, 543, { size: 12.5, color: P.bone, alpha: a });
-        txt(c, 'status: executed · evidence attached', 618, 564, { size: 12.5, color: P.sig, alpha: a });
+        rr(c, 560, 516, 390, 64, 12); c.fillStyle = `rgba(14,15,17,${0.94 * a})`; c.fill(); c.strokeStyle = `rgba(255,209,46,${a})`; c.stroke();
+        txt(c, 'frame diff > 0.004 · screen changed', 578, 542, { size: 12.5, color: P.bone, alpha: a });
+        txt(c, 'status: executed · evidence attached', 578, 566, { size: 12.5, color: P.sig, alpha: a });
       }
     }
   },

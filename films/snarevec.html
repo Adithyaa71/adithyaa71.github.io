@@ -16,7 +16,7 @@ const Q_END = [CL[1].c[0] + 10, CL[1].c[1] - 6, CL[1].c[2] + 4];
 const NN = PTS.map((p, i) => ({ i, d: Math.hypot(p.x - Q_END[0], p.y - Q_END[1], p.z - Q_END[2]) })).filter((o) => PTS[o.i].ci === 1).sort((a, b) => a.d - b.d).slice(0, 9);
 Film({
   frames: 240,
-  stage: { l: { x: 560, y: 140, w: 1000 }, p: { x: -150, y: 560, w: 1000 } },
+  stage: { l: { x: 560, y: 140, w: 1000 }, p: { x: -40, y: 600, w: 800 } },
   draw(c, f, U) {
     const { P, S, iv, ss, txt } = U;
     const th = -0.5 + f * 0.0042;                                       // the orbit
@@ -76,7 +76,7 @@ Film({
     }
     // the wrong-width vector: hits the membrane of kb_code and bounces off (a damped spring, not an easing curve)
     if (f > 168) {
-      const ctr = proj(CL[1].c[0], CL[1].c[1], CL[1].c[2]), R = 250 * ctr.s;
+      const ctr = proj(CL[1].c[0], CL[1].c[1], CL[1].c[2]), R = 175 * ctr.s;
       const t = f - 168, hit = 22;
       let d;                                                           // distance outside the membrane
       if (t < hit) d = (1 - t / hit) * 520;

@@ -64,7 +64,8 @@
       // landscape: cover. portrait: fit the width and sit on the bottom edge, so nothing at the sides is cut
       const s = this.o === 'p' ? W / im.naturalWidth : Math.min(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;   // contain: no film ever crops at an edge
       this.c.fillStyle = '#0E0F11'; this.c.fillRect(0, 0, W, H);
-      this.c.drawImage(im, (W - w) / 2, this.o === 'p' ? H - h : (H - h) / 2, w, h);
+      // portrait frames keep their scene in the lower 53%: lift it to sit just under the caption
+      this.c.drawImage(im, (W - w) / 2, this.o === 'p' ? Math.min(H - h, H * 0.34 - 0.45 * h) : (H - h) / 2, w, h);
       this.cur = k === i ? i : -1;
     }
     update(p) {
@@ -79,7 +80,9 @@
   }
   const films = qa('.film').map((sec) => {
     const film = new Film(sec);
-    ScrollTrigger.create({ trigger: sec, start: 'top 250%', end: 'bottom -100%', onEnter: () => { film.near = true; film.loadAll(); }, onEnterBack: () => { film.near = true; film.loadAll(); } });
+    // frames load about two screens ahead and are released two screens behind, so decoded memory stays bounded to ~2 films
+    const unload = () => { film.near = false; film.imgs.forEach((im) => { if (im) { im.onload = null; im.src = ''; } }); film.imgs = []; film.started = false; film.cur = -1; };
+    ScrollTrigger.create({ trigger: sec, start: 'top 250%', end: 'bottom -150%', onEnter: () => { film.near = true; film.loadAll(); }, onEnterBack: () => { film.near = true; film.loadAll(); }, onLeave: unload, onLeaveBack: unload });
     ScrollTrigger.create({ trigger: sec, start: 'top top', end: 'bottom bottom', onUpdate: (st) => film.update(st.progress), onRefresh: (st) => film.update(st.progress) });
     film.update(0);
     return film;
@@ -138,12 +141,12 @@
         const r = rects[i]; const cx = x0 + r.width / 2; x0 += r.width;
         if (ch === ' ') return;
         const el = document.createElement('span'); el.className = 'l'; el.textContent = ch; world.appendChild(el);
-        const bw = r.width * 0.8, bh = r.height * 0.74;
+        const bw = r.width * 0.72, bh = r.height * 0.74;
         const filt = top ? { category: 0x0004, mask: 0xFFFF & ~0x0008 } : { category: 0x0008, mask: 0xFFFF & ~0x0002 & ~0x0004 };   // each line only meets itself
-        const b = Bodies.rectangle(cx, -bh - (i + ri * 6) * 55 - Math.random() * 60, bw, bh, { restitution: 0.28, friction: 0.7, frictionAir: 0.014, density: 0.0018, chamfer: { radius: 3 }, angle: (Math.random() - 0.5) * 0.16, collisionFilter: filt });
+        const b = Bodies.rectangle(cx, -bh - (i + ri * 6) * 55 - Math.random() * 60, bw, bh, { restitution: 0.24, friction: 0.7, frictionAir: 0.05, density: 0.0018, chamfer: { radius: 3 }, angle: (Math.random() - 0.5) * 0.16, collisionFilter: filt });
         Body.setInertia(b, b.inertia * 6);                              // heavy to tip: letters land upright, but a fling still spins them
         // a soft spring from each letter to its slot: it falls, bounces, can be flung, and finds its place again
-        const tie = Constraint.create({ pointA: { x: cx, y: baseY - bh / 2 }, bodyB: b, length: 0, stiffness: 0.012, damping: 0.12 });
+        const tie = Constraint.create({ pointA: { x: cx, y: baseY - bh / 2 }, bodyB: b, length: 0, stiffness: 0.02, damping: 0.16 });
         L.push({ el, b, w: r.width, h: r.height, slot: cx, bh, tie, tied: false });
       });
     });
@@ -243,12 +246,12 @@
       });
       Engine.update(eng, Math.min(dt, 34));
       S.forEach((o) => { if (!o.b) return; const { x, y } = o.b.position; o.el.style.transform = `translate3d(${(x - o.w / 2).toFixed(1)}px,${(y - o.h / 2).toFixed(1)}px,0) rotate(${o.b.angle.toFixed(4)}rad)`; });
-      const la = ss((p - 0.72) / 0.12); if (lim.__a !== la) { lim.__a = la; lim.style.opacity = la; lim.style.transform = `translate3d(0,${(1 - la) * 30}px,0)`; }
+      const la = ss((p - 0.55) / 0.1); if (lim.__a !== la) { lim.__a = la; lim.style.opacity = la; lim.style.transform = `translate3d(0,${(1 - la) * 30}px,0)`; }
     });
   })();
 
   /* ── S8 · the index: names slide in with scroll; the film still follows the cursor on a spring */
-  qa('.idx__list b').forEach((b, i) => gsap.fromTo(b, { x: (i % 2 ? 1 : -1) * (portrait() ? 36 : 120) }, { x: 0, ease: 'none', scrollTrigger: { trigger: b, start: 'top bottom', end: 'top 60%', scrub: true } }));
+  qa('.idx__list b').forEach((b, i) => gsap.fromTo(b, { x: (i % 2 ? 1 : -1) * (portrait() ? 36 : 120) }, { x: 0, ease: 'none', scrollTrigger: { trigger: b, start: 'top bottom', end: 'top 88%', scrub: true } }));
   const peek = q('.idx__peek'), pimg = q('.idx__peek img');
   if (fine && peek && window.Phys) {
     const px = new Phys.Spring({ stiffness: 140, damping: 16 }), py = new Phys.Spring({ stiffness: 140, damping: 16 }), pa = new Phys.Spring({ stiffness: 200, damping: 22 });

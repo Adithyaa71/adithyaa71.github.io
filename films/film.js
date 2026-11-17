@@ -25,7 +25,7 @@
     const c = cv.getContext('2d');
     const st = (portrait ? stage.p : stage.l);                      // {x,y,w} in px; height follows the 1000×620 box
     const k = st.w / 1000;
-    window.FILM_TK = portrait ? 1.34 : 1.16;                         // type reads at real size: bigger than the layout box alone gives
+    window.FILM_TK = portrait ? 1.42 : 1.16;                         // type reads at real size: bigger than the layout box alone gives
     window.renderFrame = async (f) => {
       c.setTransform(1, 0, 0, 1, 0, 0);
       c.fillStyle = P.bg; c.fillRect(0, 0, W, H);

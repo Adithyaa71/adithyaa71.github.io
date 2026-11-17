@@ -28,11 +28,11 @@ Film({
     rr(c, -40, 282, PRISM.x + 20, 56, 10); c.fillStyle = 'rgba(236,232,223,.03)'; c.fill();
     txt(c, 'events.jsonl · append-only', 0, 266, { size: 13, color: P.dim });
     EV.forEach((e, i) => {
-      const x = PRISM.x - 120 - (i - (f < 128 ? iv(f, 10, 120) : rebuild) * 14) * 118;
-      if (x < -140 || x > PRISM.x - 10) return;
-      const a = M.clamp((x + 140) / 120) * M.clamp((PRISM.x - 70 - (x + 108)) / 30);
+      const x = PRISM.x - 150 - (i - (f < 128 ? iv(f, 10, 120) : rebuild) * 14) * 160;
+      if (x < -160 || x > PRISM.x - 10) return;
+      const a = M.clamp((x + 160) / 120) * M.clamp((PRISM.x - 70 - (x + 148)) / 30);
       c.globalAlpha = a;
-      rr(c, x, 290, 108, 40, 8); c.fillStyle = '#1A1C21'; c.fill(); c.strokeStyle = e.col; c.globalAlpha = a * 0.6; c.stroke(); c.globalAlpha = a;
+      rr(c, x, 290, 148, 40, 8); c.fillStyle = '#1A1C21'; c.fill(); c.strokeStyle = e.col; c.globalAlpha = a * 0.6; c.stroke(); c.globalAlpha = a;
       txt(c, `#${e.seq}`, x + 10, 306, { size: 11, color: P.faint });
       txt(c, e.kind, x + 10, 322, { size: 11.5, color: e.col });
     });

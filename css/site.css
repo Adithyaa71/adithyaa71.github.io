@@ -24,7 +24,7 @@ h1,h2,h3,p{margin:0}
 .no-js .loader,.ready .loader{display:none}
 
 /* ───────── nav */
-.nav{position:fixed; z-index:50; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:20px var(--g) 28px; pointer-events:none; background:linear-gradient(180deg, rgba(14,15,17,.9) 0%, rgba(14,15,17,.55) 55%, transparent)}
+.nav{position:fixed; z-index:50; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:20px var(--g) 28px; pointer-events:none; background:linear-gradient(180deg, rgba(14,15,17,.97) 0%, rgba(14,15,17,.9) 60%, transparent)}
 .nav a{pointer-events:auto}
 .nav__me{font-family:var(--disp); font-weight:800; font-size:21px; letter-spacing:.04em; text-transform:uppercase}
 .nav nav{display:flex; gap:clamp(14px,2.4vw,34px); font-size:14px; color:var(--dim)}
@@ -71,7 +71,7 @@ h1,h2,h3,p{margin:0}
 .cap__src{display:inline-block; font-family:var(--mono); font-size:13px; color:var(--bone); border-bottom:1px solid var(--sig); padding-bottom:2px}
 .cap__src:hover{color:var(--sig)}
 .cap--title{top:auto !important; margin-top:0 !important; bottom:clamp(36px,8vh,90px); width:min(520px,34vw) !important}
-.cap--title h2{font-family:var(--disp); font-weight:900; font-size:clamp(3.8rem,8.4vw,9.4rem); line-height:.78; text-transform:uppercase; letter-spacing:.005em; color:var(--bone); margin:8px 0 18px}
+.cap--title h2{font-family:var(--disp); font-weight:900; font-size:clamp(3.8rem,8.4vw,9.4rem); line-height:.9; text-transform:uppercase; letter-spacing:.005em; color:var(--bone); margin:8px 0 18px}
 .cap__no{font-family:var(--mono); font-size:13px !important; color:var(--sig) !important; letter-spacing:.1em}
 
 /* ───────── S7 · how I work */
@@ -86,7 +86,7 @@ h1,h2,h3,p{margin:0}
 .slab:hover span{color:#000; text-decoration:underline}
 .limits{position:absolute; right:var(--g); top:clamp(70px,12vh,120px); width:min(440px,34vw); display:grid; gap:12px; font-size:15px; color:var(--dim); opacity:0}
 .limits__k{font-family:var(--mono); font-size:12px; color:var(--sig); letter-spacing:.06em}
-.limits q{color:var(--bone)} .limits a{font-family:var(--mono); font-size:12px; color:var(--faint); border-bottom:1px solid var(--line)}
+.limits q{color:var(--bone)} .limits p{color:rgba(236,232,223,.78)} .limits a{font-family:var(--mono); font-size:12px; color:var(--faint); border-bottom:1px solid var(--line)}
 
 /* ───────── S8 · the repos, an index */
 .idx{position:relative; padding:clamp(100px,16vh,180px) var(--g) clamp(60px,10vh,120px)}
