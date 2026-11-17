@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aditya Ummadi — agents that prove what they did</title>
+<meta name="description" content="I build the control, memory and retrieval layers that let an AI agent work on a real computer — and leave evidence you can check. Four open-source systems in Rust and Python.">
+<meta name="theme-color" content="#07080a">
+<meta property="og:title" content="Aditya Ummadi — agents that prove what they did">
+<meta property="og:description" content="Control, memory and retrieval layers for AI agents on real machines. Rust and Python, all open source.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Geist:wght@400..700&family=JetBrains+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css?v=10">
+<script>(function(){var d=document.documentElement;var rm=matchMedia('(prefers-reduced-motion: reduce)').matches&&!/[?&]motion=full/.test(location.search);window.AU_RM=rm;d.classList.add(rm?'rm':'motion')})()</script>
+<!--
+  Hand-written. No build step. One GSAP timeline, scrubbed by scroll, drives one window
+  from the first pixel to the receipt. Lenis smooths the wheel. Three.js draws chapter 05.
+  The code in chapter 06 is real: kratos-broker/src/act.rs 440–447 and kratos-decide/src/lib.rs 74–89.
+-->
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#systems">Skip to the four systems</a>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Aditya Ummadi, home">
+    <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4H4v16h3" /><path d="M17 4h3v16h-3" /><path class="tick" d="M8.5 12.5l2.4 2.4 4.8-5.6" /></svg>
+    <span>aditya ummadi</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#story">Walkthrough</a>
+    <a href="#systems">Systems</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="btn btn--sm btn--solid magnetic" href="#contact"><span>Email me</span><i aria-hidden="true">→</i></a>
+  <div class="nav__progress" aria-hidden="true"><i></i></div>
+</header>
+
+<main id="top">
+
+<!-- static hero for reduced motion / no JS; the motion version lives inside the story pin -->
+<section class="hero-static">
+  <p class="eyebrow"><span class="live" aria-hidden="true"></span>Open for briefs · Hyderabad, UTC+5:30</p>
+  <h1>Agents that prove what they did.</h1>
+  <p>I build the control, memory and retrieval layers that let an AI agent work on a real computer — and leave evidence you can check.</p>
+</section>
+
+<section class="story" id="story" aria-label="Four systems, as case studies">
+  <div class="story__pin">
+    <div class="glow glow--rust" aria-hidden="true"></div>
+    <div class="glow glow--blue" aria-hidden="true"></div>
+    <div class="glow glow--green" aria-hidden="true"></div>
+
+    <div class="intro">
+      <p class="eyebrow"><span class="live" aria-hidden="true"></span>Available for freelance &amp; contract work</p>
+      <h2 class="intro__h" aria-label="Agents that show their work.">
+        <span class="ln"><span>Agents that</span></span>
+        <span class="ln"><span><em class="mark">show<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path d="M3 15 C 60 7, 140 5, 297 11" /></svg></em> their</span></span>
+        <span class="ln"><span>work.</span></span>
+      </h2>
+      <p class="intro__sub">I build the control, memory and retrieval layers that let an AI agent work on a real computer, and leave evidence you can check. Rust and Python, all open source.</p>
+      <div class="intro__cta">
+        <a class="btn btn--solid magnetic" href="#story" data-begin><span>Read the four systems</span><i aria-hidden="true">↓</i></a>
+        <a class="btn btn--ghost magnetic" href="https://github.com/Adithyaa71"><span>GitHub</span><i aria-hidden="true">↗</i></a>
+      </div>
+      <ul class="intro__facts">
+        <li><b>4</b> open-source systems</li>
+        <li>Rust · Python · MCP</li>
+        <li>the window: <code>kratos-decide</code>, 1 of 11 crates</li>
+      </ul>
+    </div>
+
+    <div class="chaps">
+      <article class="chap" data-c="0">
+        <p class="chap__no"><b>01</b> kratos <span>Rust · control</span></p>
+        <h2>Make the agent prove it.</h2>
+        <p>A Windows desktop broker for AI agents. It acts only if the weaker of two confidences clears the threshold, and reports done only when the screen actually changed.</p>
+        <p class="facts"><span>11 crates ·</span> <span>289 tests ·</span> <span>0 clippy warnings ·</span> <span>named pipe, no TCP</span></p>
+        <a class="src" href="https://github.com/Adithyaa71/kratos">github.com/Adithyaa71/kratos ↗</a>
+      </article>
+      <article class="chap" data-c="1">
+        <p class="chap__no"><b>02</b> bluee-harness <span>Rust · memory</span></p>
+        <h2>Derive memory. Never write it twice.</h2>
+        <p>An assistant harness whose memory is a projection of one append-only JSONL log, rebuilt from scratch by a reducer. "Why did it do that?" is answered by reading the log.</p>
+        <p class="facts"><span>MiniLM 384-dim ·</span> <span>Kuzu graph ·</span> <span>MCP tools ·</span> <span>no vector database</span></p>
+        <a class="src" href="https://github.com/Adithyaa71/bluee-harness">github.com/Adithyaa71/bluee-harness ↗</a>
+      </article>
+      <article class="chap" data-c="2">
+        <p class="chap__no"><b>03</b> snarevec <span>Python · retrieval</span></p>
+        <h2>One embedding model per index.</h2>
+        <p>A local capture-and-embed daemon. Text, code and images go to separate indexes, and vector width is probed, never typed, ever since a silent 1024-versus-768 corruption bug.</p>
+        <p class="facts"><span>768d ·</span> <span>768d ·</span> <span>512d CLIP ·</span> <span>local-first ·</span> <span>v2.2 installer</span></p>
+        <a class="src" href="https://github.com/Adithyaa71/snarevec">github.com/Adithyaa71/snarevec ↗</a>
+      </article>
+      <article class="chap" data-c="3">
+        <p class="chap__no"><b>04</b> nyx-nvim <span>Python · tooling</span></p>
+        <h2>Neovim, drivable by an agent.</h2>
+        <p>Neovim, exposed to an agent over MCP. The bridge is small on purpose: attach, edit exact line ranges, evaluate Lua. LSP and treesitter do the understanding.</p>
+        <p class="facts"><span>pynvim ·</span> <span>MCP ·</span> <span>LSP ·</span> <span>treesitter ·</span> <span>MIT</span></p>
+        <a class="src" href="https://github.com/Adithyaa71/nyx-nvim">github.com/Adithyaa71/nyx-nvim ↗</a>
+      </article>
+      <article class="chap" data-c="4">
+        <p class="chap__no"><b>05</b> how I work</p>
+        <h2>Every rule has a line number.</h2>
+        <p>Four principles behind all four systems, each enforced at a line you can open. Then the known limits, quoted from the repos.</p>
+        <a class="src" href="how-i-work.md">how-i-work.md ↗</a>
+      </article>
+    </div>
+
+    <div class="stage">
+      <div class="keylight" aria-hidden="true"></div>
+      <div class="win-shadow" aria-hidden="true"></div>
+      <div class="win-depth" aria-hidden="true"></div>
+      <div class="win" aria-hidden="true">
+        <div class="win__bar">
+          <i></i><i></i><i></i>
+          <span class="win__app" data-app>zsh</span>
+          <span class="win__cmd" data-cmd>~/src/kratos</span>
+          <span class="win__meta" data-meta>● live</span>
+        </div>
+        <div class="win__body">
+          <div class="pane pane--term" data-pane="term" data-app="zsh" data-file="~/src/kratos @ 8aaec60" data-meta="● recorded 2026-11-17">
+            <p class="t-first"><span class="t-ok">❯</span> cargo test -p kratos-decide <span class="t-dim">--release</span></p>
+            <p class="t-row t-dim">running 49 tests</p>
+            <p class="t-row t-test"><span class="t-dim">test</span> jev::tests::an_unconfigured_provider_fails_before_any_network_call <span class="t-dim">...</span> <span class="t-ok">ok</span></p><p class="t-row t-test"><span class="t-dim">test</span> jev::tests::out_of_range_confidence_is_clamped_not_trusted <span class="t-dim">...</span> <span class="t-ok">ok</span></p><p class="t-row t-test"><span class="t-dim">test</span> mock::tests::it_is_deterministic <span class="t-dim">...</span> <span class="t-ok">ok</span></p><p class="t-row t-test"><span class="t-dim">test</span> mock::tests::probabilities_sum_to_about_one <span class="t-dim">...</span> <span class="t-ok">ok</span></p><p class="t-row t-test"><span class="t-dim">test</span> tests::unconfigured_maps_to_its_own_wire_code <span class="t-dim">...</span> <span class="t-ok">ok</span></p><p class="t-row t-test"><span class="t-dim">test</span> tests::weakest_of_nothing_refuses_rather_than_passing_everything <span class="t-dim">...</span> <span class="t-ok">ok</span></p><p class="t-row t-test"><span class="t-dim">test</span> tests::confidence_outside_zero_to_one_is_clamped <span class="t-dim">...</span> <span class="t-ok">ok</span></p><p class="t-row t-test"><span class="t-dim">test</span> mock::tests::ties_go_to_the_first_option_not_the_last <span class="t-dim">...</span> <span class="t-ok">ok</span></p><p class="t-row t-test"><span class="t-dim">test</span> tests::weakest_of_one_question_is_that_question <span class="t-dim">...</span> <span class="t-ok">ok</span></p><p class="t-row t-test"><span class="t-dim">test</span> tests::weakest_picks_the_minimum_not_the_mean <span class="t-dim">...</span> <span class="t-ok">ok</span></p>
+            <p class="t-row t-dim">… and 39 more, all ok</p>
+            <p class="t-row t-res"><span class="t-ok">test result: ok. 49 passed</span><span class="t-dim">; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s</span></p>
+            <p class="t-row t-gap"><span class="t-ok">❯</span> <span class="t-dim">nvim crates/kratos-decide/src/lib.rs</span><span class="caret"></span></p>
+          </div>
+          <div class="pane pane--code" data-pane="k1" data-app="nvim" data-file="kratos/crates/kratos-decide/src/lib.rs">
+            <pre class="code" data-lang="rust"><span class="ln" data-n="74"><i>74</i>    /// The threshold is applied to this, not to an average: an action the</span><span class="ln" data-n="75"><i>75</i>    /// model is certain about, aimed at an element it is guessing at, is</span><span class="ln" data-n="76"><i>76</i>    /// exactly the failure that typed a subject line into a To field. The</span><span class="ln" data-n="77" data-h="rust"><i>77</i>    /// weakest link is the one that decides.</span><span class="ln" data-n="78"><i>78</i>    ///</span><span class="ln fold" data-n="79"><i>79</i>+-- 4 lines: /// Names that were never asked are skipped -- `navigate` carries no target</span><span class="ln" data-n="83" data-h="blue"><i>83</i>    pub fn weakest(&amp;self, names: &amp;[&amp;str]) -&gt; f64 {</span><span class="ln" data-n="84"><i>84</i>        let mut min = f64::INFINITY;</span><span class="ln" data-n="85"><i>85</i>        for name in names {</span><span class="ln" data-n="86"><i>86</i>            if let Some(c) = self.choices.get(*name) {</span><span class="ln" data-n="87"><i>87</i>                min = min.min(c.confidence);</span><span class="ln" data-n="88"><i>88</i>            }</span><span class="ln" data-n="89"><i>89</i>        }</span><span class="ln" data-n="90"><i>90</i>        if min.is_finite() {</span><span class="ln" data-n="91"><i>91</i>            min.clamp(0.0, 1.0)</span><span class="ln" data-n="92"><i>92</i>        } else {</span><span class="ln" data-n="93"><i>93</i>            0.0</span><span class="ln" data-n="94"><i>94</i>        }</span><span class="ln" data-n="95"><i>95</i>    }</span></pre>
+            <div class="status"><b>NORMAL</b><span>kratos/crates/kratos-decide/src/lib.rs</span><span class="t-dim">rust · 74:1</span></div>
+          </div>
+          <div class="pane pane--code" data-pane="k2" data-app="nvim" data-file="kratos/crates/kratos-decide/src/lib.rs">
+            <pre class="code" data-lang="rust"><span class="ln" data-n="168"><i>168</i>#[cfg(test)]</span><span class="ln" data-n="169"><i>169</i>mod tests {</span><span class="ln" data-n="170"><i>170</i>    use super::*;</span><span class="ln" data-n="171"><i>171</i></span><span class="ln" data-n="172"><i>172</i>    #[test]</span><span class="ln" data-n="173"><i>173</i>    fn weakest_picks_the_minimum_not_the_mean() {</span><span class="ln" data-n="174"><i>174</i>        let mut a = Answers::default();</span><span class="ln" data-n="175"><i>175</i>        a.choices.insert(</span><span class="ln" data-n="176"><i>176</i>            &quot;kind&quot;.into(),</span><span class="ln" data-n="177"><i>177</i>            ChoiceAnswer { choice: &quot;click&quot;.into(), confidence: 0.99, ..Default::default() },</span><span class="ln" data-n="178"><i>178</i>        );</span><span class="ln" data-n="179"><i>179</i>        a.choices.insert(</span><span class="ln" data-n="180"><i>180</i>            &quot;target&quot;.into(),</span><span class="ln" data-n="181"><i>181</i>            ChoiceAnswer { choice: &quot;e4&quot;.into(), confidence: 0.61, ..Default::default() },</span><span class="ln" data-n="182"><i>182</i>        );</span><span class="ln" data-n="183" data-h="rust"><i>183</i>        // The mean would be 0.80 and would clear a 0.70 bar. The minimum does</span><span class="ln" data-n="184" data-h="rust"><i>184</i>        // not, which is the correct answer: the target is a guess.</span><span class="ln" data-n="185" data-h="green"><i>185</i>        assert_eq!(a.weakest(&amp;[&quot;kind&quot;, &quot;target&quot;]), 0.61);</span><span class="ln" data-n="186"><i>186</i>    }</span><span class="ln" data-n="187"><i>187</i></span></pre>
+            <div class="status"><b>NORMAL</b><span>kratos/crates/kratos-decide/src/lib.rs</span><span class="t-dim">rust · 168:1</span></div>
+          </div>
+          <div class="pane pane--code" data-pane="k3" data-app="nvim" data-file="kratos/crates/kratos-shot/src/lib.rs">
+            <pre class="code" data-lang="rust"><span class="ln" data-n="36"><i>36</i>/// Full-screen fingerprint grid.</span><span class="ln" data-n="37"><i>37</i>pub const FULL_W: usize = 64;</span><span class="ln" data-n="38"><i>38</i>pub const FULL_H: usize = 36;</span><span class="ln" data-n="39"><i>39</i></span><span class="ln" data-n="40"><i>40</i>/// Region fingerprint grid, square so a wide or tall element both keep detail.</span><span class="ln" data-n="41"><i>41</i>pub const REGION_N: usize = 96;</span><span class="ln" data-n="42"><i>42</i></span><span class="ln" data-n="43"><i>43</i>/// Per-cell greyscale tolerance. Compression and subpixel rendering move a</span><span class="ln" data-n="44"><i>44</i>/// value or two without anything actually happening.</span><span class="ln" data-n="45"><i>45</i>pub const TOLERANCE: u8 = 8;</span><span class="ln" data-n="46"><i>46</i></span><span class="ln" data-n="47"><i>47</i>/// Fraction of the full screen that must differ to count as a visible change.</span><span class="ln" data-n="48" data-h="rust"><i>48</i>/// Measured idle drift on this machine is 0.0004 -- a 10x margin.</span><span class="ln" data-n="49" data-h="blue"><i>49</i>pub const FULL_THRESHOLD: f64 = 0.004;</span><span class="ln" data-n="50"><i>50</i></span><span class="ln" data-n="51"><i>51</i>/// Fraction of the cropped region that must differ. Sized so one typed</span><span class="ln" data-n="52" data-h="rust"><i>52</i>/// character clears it.</span><span class="ln" data-n="53" data-h="blue"><i>53</i>pub const REGION_THRESHOLD: f64 = 0.0015;</span></pre>
+            <div class="status"><b>NORMAL</b><span>kratos/crates/kratos-shot/src/lib.rs</span><span class="t-dim">rust · 36:1</span></div>
+          </div>
+          <div class="pane pane--code pane--jsonl" data-pane="b1" data-app="tail" data-file="sessions/ops-weekly.jsonl">
+            <pre class="code" data-lang="json"><span class="ln" data-n="1"><i>1</i>{&quot;seq&quot;:1,&quot;session_id&quot;:&quot;ops-weekly&quot;,&quot;ts&quot;:&quot;2026-11-04T08:46:58Z&quot;,&quot;kind&quot;:&quot;session_start&quot;,&quot;model&quot;:&quot;claude&quot;,&quot;persona_files&quot;:[&quot;persona.md&quot;]}</span><span class="ln" data-n="2"><i>2</i>{&quot;seq&quot;:2,&quot;session_id&quot;:&quot;ops-weekly&quot;,&quot;ts&quot;:&quot;2026-11-04T08:47:03Z&quot;,&quot;kind&quot;:&quot;user_message&quot;,&quot;text&quot;:&quot;send this week&#x27;s stock report to ops&quot;}</span><span class="ln" data-n="3"><i>3</i>{&quot;seq&quot;:3,&quot;session_id&quot;:&quot;ops-weekly&quot;,&quot;ts&quot;:&quot;2026-11-04T08:47:05Z&quot;,&quot;kind&quot;:&quot;tool_call&quot;,&quot;call_id&quot;:&quot;c1&quot;,&quot;server&quot;:&quot;kratos&quot;,&quot;tool&quot;:&quot;desktop_observe&quot;,&quot;args&quot;:{&quot;window&quot;:&quot;Mail&quot;}}</span><span class="ln" data-n="4"><i>4</i>{&quot;seq&quot;:4,&quot;session_id&quot;:&quot;ops-weekly&quot;,&quot;ts&quot;:&quot;2026-11-04T08:47:05Z&quot;,&quot;kind&quot;:&quot;tool_result&quot;,&quot;call_id&quot;:&quot;c1&quot;,&quot;ok&quot;:true,&quot;result&quot;:{&quot;elements&quot;:198}}</span><span class="ln" data-n="5"><i>5</i>{&quot;seq&quot;:5,&quot;session_id&quot;:&quot;ops-weekly&quot;,&quot;ts&quot;:&quot;2026-11-04T08:47:07Z&quot;,&quot;kind&quot;:&quot;tool_call&quot;,&quot;call_id&quot;:&quot;c2&quot;,&quot;server&quot;:&quot;kratos&quot;,&quot;tool&quot;:&quot;desktop_act&quot;,&quot;args&quot;:{&quot;instruction&quot;:&quot;click \&quot;Send\&quot; in the compose dialog&quot;}}</span><span class="ln" data-n="6"><i>6</i>{&quot;seq&quot;:6,&quot;session_id&quot;:&quot;ops-weekly&quot;,&quot;ts&quot;:&quot;2026-11-04T08:47:08Z&quot;,&quot;kind&quot;:&quot;tool_result&quot;,&quot;call_id&quot;:&quot;c2&quot;,&quot;ok&quot;:true,&quot;result&quot;:{&quot;status&quot;:&quot;executed&quot;}}</span></pre>
+            <div class="status"><b>TAIL</b><span>sessions/ops-weekly.jsonl</span><span class="t-dim">example session · real format (eventlog.rs)</span></div>
+          </div>
+          <div class="pane pane--code" data-pane="b2" data-app="nvim" data-file="bluee-harness/src/reduce.rs">
+            <pre class="code" data-lang="rust"><span class="ln" data-n="1"><i>1</i>//! The reducer (§4a) - reads the event log, writes the derived layers.</span><span class="ln" data-n="2"><i>2</i>//!</span><span class="ln" data-n="3" data-h="blue"><i>3</i>//! This is the piece that makes &quot;the event log is the source of truth&quot; true</span><span class="ln" data-n="4"><i>4</i>//! rather than decorative. It is a **full projection, not an incremental</span><span class="ln" data-n="5"><i>5</i>//! update**: every run clears the vector store and the graph and rebuilds both</span><span class="ln" data-n="6"><i>6</i>//! from scratch. That is deliberate - it means deleting the derived stores and</span><span class="ln" data-n="7"><i>7</i>//! re-running reproduces them exactly, which is the property the whole memory</span><span class="ln" data-n="8"><i>8</i>//! design rests on. If the layers were instead written inline as a side effect</span><span class="ln" data-n="9"><i>9</i>//! of the turn loop, they would drift, silently, and nobody would notice until</span><span class="ln" data-n="10"><i>10</i>//! the assistant started recalling things that never happened.</span><span class="ln" data-n="11"><i>11</i>//!</span><span class="ln" data-n="12" data-h="rust"><i>12</i>//! Cost of that choice: rebuild time grows with the log. Fine at personal</span><span class="ln" data-n="13" data-h="rust"><i>13</i>//! scale; when it stops being fine, add a watermark and reduce incrementally -</span><span class="ln" data-n="14" data-h="rust"><i>14</i>//! but keep a full rebuild available to check the incremental path honest.</span><span class="ln" data-n="15"><i>15</i></span><span class="ln" data-n="16"><i>16</i>use anyhow::{Context, Result};</span><span class="ln" data-n="17"><i>17</i>use fastembed::{EmbeddingModel, TextEmbedding, TextInitOptions};</span><span class="ln" data-n="18"><i>18</i>use std::collections::{BTreeMap, BTreeSet};</span><span class="ln" data-n="19"><i>19</i></span><span class="ln" data-n="20"><i>20</i>use crate::config::Config;</span></pre>
+            <div class="status"><b>NORMAL</b><span>bluee-harness/src/reduce.rs</span><span class="t-dim">rust · 1:1</span></div>
+          </div>
+          <div class="pane pane--space" data-pane="space" data-app="snarevec" data-file="snarevec · local daemon">
+            <p class="space__q"><span class="t-ok">❯</span> snarevec search <span class="t-str">"where does the gate read confidence?"</span></p>
+            <div class="space__route">
+              <p><span class="t-dim">index </span> kb_code <span class="t-dim">· code model · 768d</span></p>
+              <p><span class="t-dim">filter</span> modality = code <span class="t-dim">·</span> group = kratos</p>
+              <p class="t-ok">→ one space searched. kb_text and kb_images are never touched.</p>
+            </div>
+          </div>
+          <div class="pane pane--code" data-pane="s2" data-app="nvim" data-file="snarevec/daemon/main.py">
+            <pre class="code" data-lang="python"><span class="ln" data-n="345"><i>345</i>@app.get(&quot;/installers/ollama/models&quot;)</span><span class="ln" data-n="346"><i>346</i>def ollama_models():</span><span class="ln" data-n="347"><i>347</i>    &quot;&quot;&quot;v2.2 — the models actually present on the local ollama server.</span><span class="ln" data-n="348"><i>348</i></span><span class="ln" data-n="349" data-h="rust"><i>349</i>    This exists because the Backends form let you TYPE a model name and hand-set</span><span class="ln" data-n="350" data-h="rust"><i>350</i>    its dimensions. Typing `mxbai-embed-large` (1024-dim) into a form still</span><span class="ln" data-n="351" data-h="rust"><i>351</i>    reading 768 silently creates a collection whose vectors are the wrong width —</span><span class="ln" data-n="352" data-h="rust"><i>352</i>    a data-corruption bug with no error message. The UI now picks from this list</span><span class="ln" data-n="353" data-h="green"><i>353</i>    and probes the width; nothing about vector size is ever typed by hand.</span><span class="ln" data-n="354"><i>354</i>    &quot;&quot;&quot;</span><span class="ln" data-n="355"><i>355</i>    return {&quot;models&quot;: installers.ollama_embedding_models()}</span><span class="ln" data-n="356"><i>356</i></span><span class="ln" data-n="357"><i>357</i></span><span class="ln" data-n="358" data-h="blue"><i>358</i>@app.post(&quot;/backends/probe-dims&quot;)</span><span class="ln" data-n="359"><i>359</i>def probe_dims(body: ProbeDimsRequest) -&gt; ProbeDimsResult:</span><span class="ln" data-n="360" data-h="blue"><i>360</i>    &quot;&quot;&quot;Embed one throwaway string and MEASURE the vector.</span><span class="ln" data-n="361"><i>361</i></span><span class="ln" data-n="362"><i>362</i>    Deliberately not a lookup table: a table goes stale the moment a new model</span><span class="ln" data-n="363"><i>363</i>    ships, and being wrong here is worse than being slow. One real embedding is</span><span class="ln" data-n="364"><i>364</i>    the only trustworthy answer.&quot;&quot;&quot;</span></pre>
+            <div class="status"><b>NORMAL</b><span>snarevec/daemon/main.py</span><span class="t-dim">python · 345:1</span></div>
+          </div>
+          <div class="pane pane--code" data-pane="n2" data-app="nvim" data-file="nyx-nvim/mcp/mcp_client.py">
+            <pre class="code" data-lang="python"><span class="ln" data-n="130"><i>130</i>def edit_buffer(start_line: int, end_line: int, new_lines: list[str], path: str = None) -&gt; None:</span><span class="ln" data-n="131"><i>131</i>    &quot;&quot;&quot;</span><span class="ln" data-n="132" data-h="rust"><i>132</i>    Replace lines [start_line, end_line] (1-indexed, inclusive) with new_lines.</span><span class="ln" data-n="133" data-h="rust"><i>133</i>    Always read_buffer first to know exact line numbers.</span><span class="ln" data-n="134"><i>134</i>    &quot;&quot;&quot;</span><span class="ln" data-n="135"><i>135</i>    log.info(f&quot;edit_buffer lines={start_line}-{end_line} path={path}&quot;)</span><span class="ln" data-n="136"><i>136</i>    nvim = _get_nvim()</span><span class="ln" data-n="137"><i>137</i>    if path:</span><span class="ln" data-n="138"><i>138</i>        nvim.command(f&quot;e {path}&quot;)</span><span class="ln" data-n="139"><i>139</i>    buf = nvim.current.buffer</span><span class="ln" data-n="140"><i>140</i>    # Convert to 0-indexed for nvim API</span><span class="ln" data-n="141" data-h="blue"><i>141</i>    buf[start_line - 1 : end_line] = new_lines</span><span class="ln" data-n="142" data-h="green"><i>142</i>    nvim.command(&quot;w&quot;)</span><span class="ln fold" data-n="143"><i>143</i>+-- 55 lines: </span><span class="ln" data-n="198"><i>198</i>def eval_lua(expr: str) -&gt; Any:</span><span class="ln" data-n="199"><i>199</i>    &quot;&quot;&quot;</span><span class="ln" data-n="200" data-h="rust"><i>200</i>    Evaluate a Lua expression in Neovim and return the result.</span><span class="ln" data-n="201"><i>201</i>    Example: eval_lua(&quot;vim.lsp.get_clients()&quot;)</span><span class="ln" data-n="202"><i>202</i>    &quot;&quot;&quot;</span><span class="ln" data-n="203"><i>203</i>    log.info(f&quot;eval_lua expr={expr!r}&quot;)</span><span class="ln" data-n="204"><i>204</i>    nvim = _get_nvim()</span><span class="ln" data-n="205" data-h="blue"><i>205</i>    return nvim.exec_lua(expr)</span><span class="ln" data-n="206"><i>206</i></span></pre>
+            <div class="status"><b>NORMAL</b><span>nyx-nvim/mcp/mcp_client.py</span><span class="t-dim">python · 130:1</span></div>
+          </div>
+        </div>
+      </div>
+      <canvas class="space" id="space" aria-hidden="true"></canvas>
+      <div class="space-labels" aria-hidden="true">
+        <span data-sl="0">kb_text · 768d</span>
+        <span data-sl="1">kb_code · 768d</span>
+        <span data-sl="2">kb_images · 512d</span>
+        <span data-sl="q">query</span>
+      </div>
+      <div class="side" aria-hidden="true">
+        <div class="sc sc--bench" data-sc="k1" style="top:2%">
+          <p class="side__k">p50 · docs/benchmarks.md</p>
+          <p class="bm"><span>gate verdict</span><i style="--w:0.120"></i><b>0.004 ms</b><em>n=20,000</em></p><p class="bm"><span>status round trip</span><i style="--w:0.325"></i><b>0.042 ms</b><em>n=400</em></p><p class="bm"><span>decide · offline</span><i style="--w:0.374"></i><b>0.074 ms</b><em>n=200</em></p><p class="bm"><span>full fingerprint</span><i style="--w:0.704"></i><b>3.3 ms</b><em>n=200</em></p><p class="bm"><span>mcp cold start</span><i style="--w:0.822"></i><b>12.9 ms</b><em>n=9</em></p><p class="bm"><span>broker cold start</span><i style="--w:0.885"></i><b>26.5 ms</b><em>n=5</em></p>
+          <p class="sc__foot">nearest-rank, release build, log scale · offline decision model</p>
+        </div>
+        <div class="sc sc--why" data-sc="k2" style="top:22%">
+          <p class="side__k">the test, as numbers</p>
+          <div class="why">
+            <p class="why__in"><span>kind</span><b>0.99</b><span>target</span><b>0.61</b></p>
+            <div class="why__axis"><i class="why__bar" style="--v:.70"></i>
+              <p class="why__row why--mean" style="--v:.80"><span>mean</span><b>0.80</b><em>clears 0.70 — wrong</em></p>
+              <p class="why__row why--min" style="--v:.61"><span>min</span><b>0.61</b><em>refused — correct</em></p>
+            </div>
+          </div>
+          <p class="sc__foot">"the target is a guess." · lib.rs:184</p>
+        </div>
+        <div class="sc sc--drift" data-sc="k3" style="top:40%">
+          <p class="side__k">evidence, not exit codes</p>
+          <p class="drift"><span>idle screen drift, dev machine</span><b>0.0004</b><i style="--w:.10"></i></p>
+          <p class="drift"><span>FULL_THRESHOLD</span><b>0.004</b><i style="--w:1"></i></p>
+          <p class="sc__txt">A 10&times; margin over measured noise. A frame too busy to read returns <code>inconclusive</code>, which never counts as success.</p>
+          <p class="sc__foot">kratos-shot/src/lib.rs:47–53</p>
+        </div>
+        <div class="sc sc--layers" data-sc="b1" style="top:6%">
+          <p class="side__k">one source of truth</p>
+          <p class="ly"><span>truth</span><b>events.jsonl</b><i>append-only · never rewritten</i></p>
+          <p class="ly ly--d"><span>derived</span><b>vector · 384-dim</b><i>SQLite BLOBs · brute-force cosine</i></p>
+          <p class="ly ly--d"><span>derived</span><b>graph · Kuzu</b><i>only what the log proves</i></p>
+          <p class="ly ly--r"><span>rebuild</span><b>bluee reduce</b><i>full projection, from scratch</i></p>
+        </div>
+        <div class="sc sc--math" data-sc="b2" style="top:24%">
+          <p class="side__k">why there is no vector database</p>
+          <p class="math"><i></i><b data-mcount="100000">0</b><span>chunks</span></p>
+          <p class="math"><i>&times;</i><b>384</b><span>dims</span></p>
+          <p class="math"><i>&times;</i><b>4 B</b><span>f32</span></p>
+          <p class="math math--eq"><i>=</i><b data-mres>0 MB</b><span>resident</span></p>
+          <p class="sc__txt">The README puts brute-force cosine over all of it at single-digit milliseconds in Rust: a dependency removed, not added.</p>
+          <p class="sc__foot">bluee-harness/README.md · "Memory, in three layers"</p>
+        </div>
+        <div class="sc sc--idx" data-sc="s1" style="top:12%">
+          <p class="side__k">three indexes · one model each</p>
+          <p class="ix ix--t"><span>kb_text</span><b>768d</b><i>pages · PDFs · sheets</i></p>
+          <p class="ix ix--c"><span>kb_code</span><b>768d</b><i>source · whole repos</i></p>
+          <p class="ix ix--i"><span>kb_images</span><b>512d</b><i>CLIP · video keyframes</i></p>
+          <p class="sc__txt">Vectors from different models live in different spaces; mixing them makes search meaningless. Each point still carries group, topic and modality, so a query can filter across all three without the vectors ever touching.</p>
+        </div>
+        <div class="sc sc--probe" data-sc="s2" style="top:30%">
+          <p class="side__k">the fix, in the code</p>
+          <p class="probe"><code>POST /backends/probe-dims</code><span>embed one throwaway string, measure the vector</span></p>
+          <p class="probe"><code>dimension mismatch: backend returned {got}, config says {dims}</code><span>backends/base.py:22 · health check</span></p>
+          <p class="sc__txt sc__honest">There is a retrieval benchmark harness (recall@k, MRR, exact-chunk rate). No results are published yet.</p>
+        </div>
+        <div class="sc sc--contract" data-sc="n2" style="top:8%">
+          <p class="side__k">the bridge&rsquo;s contract</p>
+          <p class="ct"><span>in</span><b>1-indexed, inclusive ranges</b><i>how people and LSP count lines</i></p>
+          <p class="ct"><span>once</span><b>buf[start - 1 : end]</b><i>the only place the off-by-one lives</i></p>
+          <p class="ct"><span>then</span><b>:w</b><i>the edit is on disk, where git can see it</i></p>
+          <p class="ct"><span>rule</span><b>read_buffer first</b><i>never edit a line number you guessed</i></p>
+          <p class="sc__foot">nyx-nvim/mcp/mcp_client.py · edit_buffer, eval_lua</p>
+        </div>
+      </div>
+      <div class="principles">
+        <ol>
+          <li><h3>Gate on the weakest signal, not the average.</h3><a href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-decide/src/lib.rs#L83">kratos-decide/src/lib.rs:83</a></li>
+          <li><h3>Derive state. Never write it twice.</h3><a href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/reduce.rs#L1">bluee-harness/src/reduce.rs:1</a></li>
+          <li><h3>Measure it. Don&rsquo;t type it.</h3><a href="https://github.com/Adithyaa71/snarevec/blob/main/daemon/main.py#L358">snarevec/daemon/main.py:358</a></li>
+          <li><h3>Refuse rather than guess.</h3><a href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-broker/src/act.rs#L850">kratos-broker/src/act.rs:850</a></li>
+        </ol>
+        <div class="limits">
+          <p class="side__k">known limits, quoted from the repos</p>
+          <p><q>Dense-only retrieval &hellip; is expected to do badly on exact-identifier queries.</q><a href="https://github.com/Adithyaa71/snarevec/blob/main/benchmark/README.md#L9">snarevec/benchmark/README.md:9</a></p>
+          <p><q>Cost of that choice: rebuild time grows with the log.</q><a href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/reduce.rs#L12">bluee-harness/src/reduce.rs:12</a></p>
+          <p><q>Status: not run</q> &mdash; kratos&rsquo;s four real-task scripts are written; the run waits on the operator approving the harness.<a href="https://github.com/Adithyaa71/kratos/blob/main/docs/real-tasks.md#L15">kratos/docs/real-tasks.md:15</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud" aria-hidden="true">
+      <div class="rail"><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="clock" data-clock><b>00</b><span class="t-dim">/ 05 · scroll to begin</span></p>
+    </div>
+    <a class="scrollcue" href="#story" data-begin aria-label="Begin"><span>Scroll</span><i></i></a>
+  </div>
+
+  <div class="stills" aria-hidden="true"></div>
+</section>
+
+<section class="systems" id="systems">
+  <div class="wrap">
+    <p class="eyebrow">The four systems</p>
+    <h2 class="sec-h" data-split><span class="ln"><span>Read the source.</span></span><span class="ln"><span class="dim">It's all public.</span></span></h2>
+    <ul class="repos">
+      <li><a href="https://github.com/Adithyaa71/kratos"><b>kratos</b><span>Rust · control</span><em>Typed decisions, a refusal gate, evidence before success.</em><small>Cargo workspace · pushed Nov 10</small><i aria-hidden="true">↗</i></a></li>
+      <li><a href="https://github.com/Adithyaa71/bluee-harness"><b>bluee-harness</b><span>Rust · memory</span><em>Memory as a projection of an append-only event log.</em><small>Kuzu + fastembed · pushed Oct 17</small><i aria-hidden="true">↗</i></a></li>
+      <li><a href="https://github.com/Adithyaa71/snarevec"><b>snarevec</b><span>Python · retrieval</span><em>Local daemon: three indexes, one embedding model each, widths probed.</em><small>local daemon · pushed Aug 6</small><i aria-hidden="true">↗</i></a></li>
+      <li><a href="https://github.com/Adithyaa71/nyx-nvim"><b>nyx-nvim</b><span>Python · tooling</span><em>Neovim with an MCP bridge, drivable by an agent.</em><small>pynvim + MCP · pushed Jul 1</small><i aria-hidden="true">↗</i></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="marq" aria-label="Tools I build with">
+  <div class="marq__row" data-marq>
+    <span>Rust</span><span>tokio</span><span>named pipes</span><span>MCP</span><span>Python</span><span>fastembed</span><span>CLIP</span><span>Qdrant</span><span>Kuzu</span><span>SQLite</span><span>UI Automation</span><span>Neovim</span><span>Lua</span><span>treesitter</span><span>TypeScript</span><span>OCR</span>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow"><span class="live" aria-hidden="true"></span>Available for freelance &amp; contract work</p>
+    <h2 class="contact__h" data-split><span class="ln"><span>Bring me something</span></span><span class="ln"><span>that has to be <em>right.</em></span></span></h2>
+    <p class="contact__about">I&rsquo;m a student in Hyderabad building infrastructure for AI agents: control, memory, retrieval and tooling, in Rust and Python. I take scoped contracts: MCP servers, RAG pipelines, agent harnesses and the tooling around them.</p>
+    <ol class="terms">
+      <li><b>A short call</b>What has to be true when it&rsquo;s done, and how we&rsquo;ll check it.</li>
+      <li><b>A written scope</b>Deliverables, acceptance tests and a fixed price, before any code.</li>
+      <li><b>Evidence at handoff</b>Source, tests that pass on your machine, and a note on known limits.</li>
+    </ol>
+    <div class="contact__row">
+      <a class="mailbig magnetic" href="mailto:adityaummadi@gmail.com?subject=Project%20brief"><span>adityaummadi@gmail.com</span><i aria-hidden="true">↗</i></a>
+      <button class="copy" type="button" data-copy="adityaummadi@gmail.com">Copy address</button>
+    </div>
+    <p class="contact__alt"><a href="https://github.com/Adithyaa71">github.com/Adithyaa71</a><a href="https://www.upwork.com/freelancers/~01578d5e7c6de836ef">Upwork profile</a></p>
+  </div>
+  <footer class="foot">
+    <div class="foot__row"><span>Hyderabad · UTC+5:30</span><span>GSAP · Lenis · Three.js · <a href="https://github.com/Adithyaa71/adithyaa71.github.io">Source</a></span></div>
+  </footer>
+</section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="js/physics.js?v=5" defer></script>
+<script src="js/app.js?v=5" defer></script>
+<script src="js/story.js?v=6" defer></script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<script type="module" src="js/space.js?v=5"></script>
+</body>
+</html>
