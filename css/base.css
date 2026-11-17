@@ -1,0 +1,45 @@
+/* base.css · v3 design system. Every section builds on these tokens; no section defines its own colours or fonts.
+   Type: Newsreader (editorial serif, optical sizes, italic accent) for display; Switzer for reading; Fragment Mono for labels and data. */
+:root{
+  --bg:#0C0C0B; --surface:#151513; --surface2:#1C1C19;
+  --ink:#ECE8E1; --ink2:rgba(236,232,225,.70); --ink3:rgba(236,232,225,.48); --line:rgba(236,232,225,.12); --line2:rgba(236,232,225,.22);
+  --accent:#F0C64A; --cyan:#6FD0DE; --red:#FF6B5E; --green:#86E0A0;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif; --sans:"Switzer",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"Fragment Mono",ui-monospace,Consolas,monospace;
+  --g:clamp(20px,4vw,56px); --max:1320px; --r:14px;
+  /* type scale */
+  --t-hero:clamp(2.6rem,5.4vw,5.6rem); --t-h2:clamp(2.4rem,4.8vw,4.8rem); --t-h3:clamp(1.6rem,2.4vw,2.4rem);
+  --t-body:17px; --t-small:15px; --t-label:12px;
+}
+*{box-sizing:border-box}
+html{background:var(--bg); -webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:var(--t-body); line-height:1.6; letter-spacing:0; word-spacing:.06em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:clip}
+a{color:inherit; text-decoration:none}
+h1,h2,h3,p,ul,ol{margin:0}
+::selection{background:var(--accent); color:#111}
+
+/* display: light serif, tight tracking, optical sizing. The italic is the accent, not a colour */
+.disp,.h2,.h3{font-feature-settings:"liga" 0, "clig" 0}
+.disp{font-family:var(--serif); font-weight:300; font-optical-sizing:auto; letter-spacing:-.03em; line-height:.98}
+.disp em,.h2 em{font-style:italic; font-weight:300; color:var(--accent)}
+.h2{font-family:var(--serif); font-weight:300; font-optical-sizing:auto; font-size:var(--t-h2); line-height:1; letter-spacing:-.028em}
+.h3{font-family:var(--serif); font-weight:400; font-size:var(--t-h3); line-height:1.08; letter-spacing:-.02em}
+.label{font-family:var(--mono); font-size:var(--t-label); letter-spacing:.06em; text-transform:uppercase; color:var(--ink3)}
+.label b{color:var(--accent); font-weight:400}
+.num{font-variant-numeric:tabular-nums}
+.lede{font-size:clamp(1.12rem,1.5vw,1.36rem); line-height:1.55; color:var(--ink2); max-width:38em}
+
+/* section contract: <section class="sec sec--NAME" id="NAME"><div class="sec__head"><p class="label">…</p><h2 class="h2">…</h2></div>…</section> */
+.sec{position:relative; padding:clamp(96px,16vh,180px) var(--g)}
+.sec__head{max-width:var(--max); margin:0 auto clamp(40px,7vh,80px); display:grid; gap:18px}
+.wrap{max-width:var(--max); margin:0 auto}
+.link{font-family:var(--mono); font-size:13px; color:var(--ink); border-bottom:1px solid var(--accent); padding-bottom:1px}
+.link:hover{color:var(--accent)}
+.chip{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:12px; color:var(--ink2); padding:5px 10px; border:1px solid var(--line); border-radius:999px; white-space:nowrap}
+.chip:hover{border-color:var(--accent); color:var(--ink)}
+
+/* motion helpers: elements with [data-rise] start lowered and rise on a spring when they enter (js/base.js) */
+.js [data-rise]{opacity:0; transform:translate3d(0,28px,0)}
+@media (prefers-reduced-motion:reduce){ .js [data-rise]{opacity:1; transform:none} }

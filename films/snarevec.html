@@ -16,7 +16,7 @@ const Q_END = [CL[1].c[0] + 10, CL[1].c[1] - 6, CL[1].c[2] + 4];
 const NN = PTS.map((p, i) => ({ i, d: Math.hypot(p.x - Q_END[0], p.y - Q_END[1], p.z - Q_END[2]) })).filter((o) => PTS[o.i].ci === 1).sort((a, b) => a.d - b.d).slice(0, 9);
 Film({
   frames: 240,
-  stage: { l: { x: 560, y: 140, w: 1000 }, p: { x: -40, y: 600, w: 800 } },
+  stage: { l: { x: 90, y: 10, w: 1420 }, p: { x: 70, y: 260, w: 580 } },
   draw(c, f, U) {
     const { P, S, iv, ss, txt } = U;
     const th = -0.5 + f * 0.0042;                                       // the orbit

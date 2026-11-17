@@ -3,142 +3,305 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Aditya Ummadi</title>
-<meta name="description" content="Aditya Ummadi, a student in Hyderabad who builds infrastructure for AI agents: kratos, bluee-harness, snarevec and nyx-nvim.">
+<title>Aditya Ummadi · AI agent infrastructure</title>
+<meta name="description" content="Aditya Ummadi, a student in Hyderabad who builds infrastructure for AI agents: a desktop broker that refuses unsafe actions, memory you can audit, local retrieval, and an editor bridge. Four open-source systems.">
 <meta property="og:title" content="Aditya Ummadi">
-<meta property="og:description" content="I build the systems that make AI agents prove their work.">
-<meta name="theme-color" content="#0E0F11">
-<link rel="preload" href="fonts/BigShouldersDisplay-900.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:description" content="I build the systems that let AI agents do real work, and prove it.">
+<meta name="theme-color" content="#0C0C0B">
+<link rel="preload" href="fonts/Newsreader-300_600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Switzer-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/site.css?v=7">
+<link rel="stylesheet" href="css/base.css?v=4">
+<link rel="stylesheet" href="css/site.css?v=13">
+<link rel="stylesheet" href="css/skills.css?v=3">
+<link rel="stylesheet" href="css/stack.css?v=1">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-<div class="loader" aria-hidden="true">
-  <div class="loader__top"></div><div class="loader__bot"></div>
-  <p class="loader__n"><span data-load>000</span></p>
-  <p class="loader__k">loading the films</p>
-</div>
-
 <header class="nav">
   <a class="nav__me" href="#top">Aditya Ummadi</a>
-  <nav><a href="#work">Work</a><a href="#how">How I work</a><a href="#contact">Contact</a></nav>
+  <nav><a href="#skills">Skills</a><a href="#work">Work</a><a href="#stack">Stack</a><a class="nav__cta" href="#contact">Contact</a></nav>
 </header>
 
 <main id="top">
 
-<!-- S1 · about me: the name is a set of rigid bodies -->
-<section class="me" aria-label="About me">
-  <div class="me__pin">
-    <h1 class="me__name" aria-label="Aditya Ummadi"><span class="me__row" data-row="0">ADITYA</span><span class="me__row" data-row="1">UMMADI</span></h1>
-    <div class="me__world" aria-hidden="true"></div>
-    <div class="me__intro">
-      <p class="me__line">Hyderabad, India · student · building in public</p>
-      <p class="me__lead">I build infrastructure for AI agents: the control, memory and retrieval layers that let an agent do real work, and prove it did.</p>
+<!-- 01 · about -->
+<section class="hero" aria-label="About me">
+  <div class="hero__in">
+    <p class="label hero__k" data-rise><span><b>01</b> · About</span><span class="dot"></span><span>Hyderabad, India</span><span>Open to contract work</span></p>
+    <h1 class="disp hero__h"><span class="ln"><span>I’m Aditya. I build the systems</span></span> <span class="ln"><span>that let AI agents do <em>real work</em>,</span></span> <span class="ln"><span>and prove they did it.</span></span></h1>
+    <div class="hero__row">
+      <p class="lede" data-rise>I’m a student who builds by directing AI coding agents. Watching them report “done” when they weren’t is what got me started: a broker that refuses unsafe clicks, memory you can audit, local search, and an editor bridge. Four systems, all open source.</p>
+      <ul class="hero__facts" data-rise>
+        <li><b class="num">4</b><span>open-source systems</span></li>
+        <li><b class="num">~55k</b><span>lines of Rust, Python and Lua</span></li>
+        <li><b class="num">49/49</b><span>kratos-decide tests passing, recorded run</span></li>
+      </ul>
     </div>
-    <p class="me__hint" aria-hidden="true">grab a letter · or scroll</p>
+  </div>
+  <div class="reel" aria-label="The four systems, in motion">
+    <a class="reel__w" href="#case-kratos" data-reel="kratos" data-n="60"><div class="reel__f"><canvas></canvas></div><span><b>kratos</b> refuses, then proves</span></a>
+    <a class="reel__w" href="#case-bluee" data-reel="bluee" data-n="53"><div class="reel__f"><canvas></canvas></div><span><b>bluee-harness</b> rebuilds memory from a log</span></a>
+    <a class="reel__w" href="#case-snarevec" data-reel="snarevec" data-n="60"><div class="reel__f"><canvas></canvas></div><span><b>snarevec</b> searches one space</span></a>
+    <a class="reel__w" href="#case-nyx" data-reel="nyx" data-n="48"><div class="reel__f"><canvas></canvas></div><span><b>nyx-nvim</b> edits exact lines</span></a>
   </div>
 </section>
 
-<!-- S2 · who I am: three statements, lit word by word as you scroll -->
-<section class="say" aria-label="Why I build this">
-  <div class="say__pin">
-    <p class="say__s" data-s="0">I work through AI agents. They write, they click, they <em>ship</em>.</p>
-    <p class="say__s" data-s="1">They kept telling me <em>done</em>. Often, they weren't.</p>
-    <p class="say__s" data-s="2">So I built the systems that make them <em>prove it</em>.</p>
-    <div class="say__bar"><i></i></div>
+<section class="sec sec--skills" id="skills">
+  <div class="wrap sk">
+    <div class="sk__side">
+      <div class="sec__head sk__head">
+        <p class="label"><b>02</b> · Skills</p>
+        <h2 class="h2">What I can <em>build</em> for you.</h2>
+        <p class="lede">Each skill below is backed by code you can open. Click any file to see the line.</p>
+      </div>
+      <div class="sk__stack">
+        <p class="label">stack used across the repos</p>
+        <p class="sk__stackline">Rust · Python · Lua · JavaScript · tokio · Tauri · FastAPI · ONNX Runtime · fastembed · Kuzu · SQLite · Qdrant · pynvim · Neovim · MCP</p>
+      </div>
+    </div>
+    <ol class="sk__list">
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">01</span>
+        <div class="sk__body">
+          <h3 class="h3">Agent safety &amp; desktop control</h3>
+          <p class="sk__desc">Agents that operate real Windows apps, refuse when unsure, and prove the screen changed.</p>
+          <ul class="sk__chips"><li class="chip">Windows UI Automation</li><li class="chip">screen-diff evidence</li><li class="chip">OCR + ONNX detection</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-decide/src/lib.rs#L74" target="_blank" rel="noopener">kratos · crates/kratos-decide/src/lib.rs:74 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-native/src/uia.rs#L22" target="_blank" rel="noopener">kratos · crates/kratos-native/src/uia.rs:22 ↗</a>
+            </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">02</span>
+        <div class="sk__body">
+          <h3 class="h3">MCP integrations</h3>
+          <p class="sk__desc">Wiring tools and agents together over the Model Context Protocol.</p>
+          <ul class="sk__chips"><li class="chip">Rust MCP server</li><li class="chip">rmcp client</li><li class="chip">Python MCP tools</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/tree/main/crates/kratos-mcp" target="_blank" rel="noopener">kratos · crates/kratos-mcp ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/mcp.rs#L9" target="_blank" rel="noopener">bluee-harness · src/mcp.rs:9 ↗</a>
+            </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">03</span>
+        <div class="sk__body">
+          <h3 class="h3">Agent harnesses</h3>
+          <p class="sk__desc">Tool-calling assistants with sub-agents, hooks and plans.</p>
+          <ul class="sk__chips"><li class="chip">streaming tool-call loop</li><li class="chip">scoped sub-agents</li><li class="chip">pre/post-tool hooks</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/agent.rs" target="_blank" rel="noopener">bluee-harness · src/agent.rs ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/subagents.rs#L47" target="_blank" rel="noopener">bluee-harness · src/subagents.rs:47 ↗</a>
+            </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">04</span>
+        <div class="sk__body">
+          <h3 class="h3">Inspectable AI memory</h3>
+          <p class="sk__desc">Memory you can read, delete and rebuild, not a black box.</p>
+          <ul class="sk__chips"><li class="chip">append-only event log</li><li class="chip">reducer projections</li><li class="chip">embeddings + SQLite search</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/eventlog.rs#L149" target="_blank" rel="noopener">bluee-harness · src/eventlog.rs:149 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/reduce.rs#L188" target="_blank" rel="noopener">bluee-harness · src/reduce.rs:188 ↗</a>
+            </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">05</span>
+        <div class="sk__body">
+          <h3 class="h3">Retrieval &amp; RAG pipelines</h3>
+          <p class="sk__desc">Turn pages, PDFs, code, images and audio into searchable local collections.</p>
+          <ul class="sk__chips"><li class="chip">4 chunking strategies</li><li class="chip">one model per index</li><li class="chip">OCR for scans</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/blob/main/daemon/chunking.py#L38" target="_blank" rel="noopener">snarevec · daemon/chunking.py:38 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/tree/main/daemon/backends" target="_blank" rel="noopener">snarevec · daemon/backends ↗</a>
+            </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">06</span>
+        <div class="sk__body">
+          <h3 class="h3">Browser extensions &amp; local services</h3>
+          <p class="sk__desc">Chrome extensions and localhost APIs that capture and process the web.</p>
+          <ul class="sk__chips"><li class="chip">Chrome MV3 extension</li><li class="chip">Readability extraction</li><li class="chip">FastAPI daemon</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/blob/main/extension/manifest.json" target="_blank" rel="noopener">snarevec · extension/manifest.json ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/blob/main/daemon/main.py#L37" target="_blank" rel="noopener">snarevec · daemon/main.py:37 ↗</a>
+            </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">07</span>
+        <div class="sk__body">
+          <h3 class="h3">Editor tooling</h3>
+          <p class="sk__desc">Agents that edit code through Neovim, with LSP and git.</p>
+          <ul class="sk__chips"><li class="chip">pynvim RPC bridge</li><li class="chip">LSP definition/references</li><li class="chip">safe line-range edits</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/nyx-nvim/blob/main/mcp/mcp_client.py#L130" target="_blank" rel="noopener">nyx-nvim · mcp/mcp_client.py:130 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/nyx-nvim/blob/main/tools/internal/_lsp.py#L15" target="_blank" rel="noopener">nyx-nvim · tools/internal/_lsp.py:15 ↗</a>
+            </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">08</span>
+        <div class="sk__body">
+          <h3 class="h3">Measurement &amp; shipping</h3>
+          <p class="sk__desc">Benchmarks with n and p95, installers, CI releases and docs.</p>
+          <ul class="sk__chips"><li class="chip">Rust benchmark crate</li><li class="chip">retrieval-quality harness</li><li class="chip">Windows installer</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/blob/main/docs/benchmarks.md" target="_blank" rel="noopener">kratos · docs/benchmarks.md ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-bench/src/main.rs" target="_blank" rel="noopener">kratos · crates/kratos-bench/src/main.rs ↗</a>
+            </div>
+        </div>
+      </div>
+    </li>
+    </ol>
   </div>
 </section>
 
-<div id="work"></div>
-
-<!-- S3–S6 · four films, scrubbed by scroll. Captions are keyed to film frames. -->
-<section class="film film--kratos" data-film="kratos" data-frames="240" aria-label="kratos">
-  <div class="film__pin">
-    <canvas class="film__cv"></canvas>
-    <div class="film__shade"></div>
-    <div class="cap cap--title" data-in="0" data-out="44"><p class="cap__no">01</p><h2>kratos</h2><p>A Windows desktop broker for AI agents. Rust, 11 crates, 289 tests.</p></div>
-    <div class="cap" data-in="80" data-out="128"><p>Before it clicks, it scores two things: <b>is this the right kind of control</b>, and <b>is it the right one</b>. It acts on the <em>weaker</em> score.</p><p class="cap__m">0.99 and 0.61 → 0.61. The bar is 0.70. Refused.</p></div>
-    <div class="cap" data-in="174" data-out="204"><p>A clear target clears the bar. Then, and only then, it acts.</p><p class="cap__m">min(0.98, 0.94) = 0.94 ≥ 0.70</p></div>
-    <div class="cap" data-in="206" data-out="241"><p>And it proves it: the screen before and after is compared. No visible change, no <em>done</em>.</p><a class="cap__src" href="https://github.com/Adithyaa71/kratos">github.com/Adithyaa71/kratos ↗</a></div>
+<!-- 03 · work: four case studies, each film scrubbed by its own stretch of scroll -->
+<section class="sec sec--work" id="work" aria-label="Work">
+  <div class="sec__head">
+    <p class="label"><b>03</b> · Work</p>
+    <h2 class="h2">What I built with <em>them</em>.</h2>
+    <p class="lede">Four repositories. Each film below is rendered from code and scrubs with your scroll. The numbers come from the repos, and the code is cut from them by line number.</p>
+  </div>
+  <div class="cases">
+    <article class="case" id="case-kratos" data-film="kratos" data-frames="240">
+      <div class="case__card">
+        <div class="case__spec">
+          <p class="label"><b>repo 1/4</b> · Rust</p>
+          <h3 class="case__name">kratos</h3>
+          <p class="case__pitch">A desktop broker that lets AI agents use real Windows apps, refuses when it isn’t sure, and proves the screen changed.</p>
+          <ul class="case__nums"><li><b class="num">11 crates</b><span>in one Rust workspace</span></li><li><b class="num">26.5 ms</b><span>broker cold start, p50 (docs/benchmarks.md)</span></li><li><b class="num">49 tests</b><span>in kratos-decide alone, all passing</span></li></ul>
+          <figure class="code"><figcaption><a href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-decide/src/lib.rs#L83-L95">kratos/crates/kratos-decide/src/lib.rs<b>:83–95</b> ↗</a></figcaption><pre><span><i>83</i>    <span class="k">pub</span> <span class="k">fn</span> <span class="f">weakest</span>(&amp;<span class="k">self</span>, names: &amp;[&amp;str]) -&gt; f64 {</span><span class="on"><i>84</i>        <span class="k">let</span> <span class="k">mut</span> min = f64::INFINITY;</span><span><i>85</i>        <span class="k">for</span> name <span class="k">in</span> names {</span><span><i>86</i>            <span class="k">if</span> <span class="k">let</span> <span class="k">Some</span>(c) = <span class="k">self</span>.choices.<span class="f">get</span>(*name) {</span><span class="on"><i>87</i>                min = min.<span class="f">min</span>(c.confidence);</span><span><i>88</i>            }</span><span><i>89</i>        }</span><span><i>90</i>        <span class="k">if</span> min.<span class="f">is_finite</span>() {</span><span><i>91</i>            min.<span class="f">clamp</span>(<span class="n">0.0</span>, <span class="n">1.0</span>)</span><span><i>92</i>        } <span class="k">else</span> {</span><span><i>93</i>            <span class="n">0.0</span></span><span><i>94</i>        }</span><span><i>95</i>    }</span></pre></figure>
+          <a class="link" href="https://github.com/Adithyaa71/kratos">github.com/Adithyaa71/kratos ↗</a>
+        </div>
+        <div class="case__stage">
+          <div class="win"><div class="win__bar"><i></i><i></i><i></i><span>kratos</span><em class="num" data-fc>000</em></div>
+            <canvas class="case__cv"></canvas></div>
+          <div class="beats"><p class="beat" data-in="0" data-out="46">An agent is about to click <b>Delete all</b>.</p><p class="beat" data-in="80" data-out="128">It scores <b>kind</b> 0.99 and <b>target</b> 0.61. The gate takes the weaker: 0.61 &lt; 0.70. <em>Refused.</em></p><p class="beat" data-in="130" data-out="172">It looks again and finds a target it is sure of.</p><p class="beat" data-in="174" data-out="204">A clear target: min(0.98, 0.94) = 0.94. It acts.</p><p class="beat" data-in="206" data-out="999">Then it proves it: before and after frames differ. No change, no <em>done</em>.</p></div>
+          <div class="case__rail"><i></i></div>
+        </div>
+      </div>
+    </article>
+    <article class="case" id="case-bluee" data-film="bluee" data-frames="210">
+      <div class="case__card">
+        <div class="case__spec">
+          <p class="label"><b>repo 2/4</b> · Rust</p>
+          <h3 class="case__name">bluee-harness</h3>
+          <p class="case__pitch">An assistant harness whose memory is derived from one append-only log, so “why did it do that?” is answered by reading it.</p>
+          <ul class="case__nums"><li><b class="num">~17k lines</b><span>of Rust, 30 modules</span></li><li><b class="num">1 log</b><span>append-only; vectors and graph are projections</span></li><li><b class="num">80 tests</b><span>in Rust</span></li></ul>
+          <figure class="code"><figcaption><a href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/eventlog.rs#L149-L163">bluee-harness/src/eventlog.rs<b>:149–163</b> ↗</a></figcaption><pre><span><i>149</i>    <span class="k">pub</span> <span class="k">fn</span> <span class="f">append</span>(&amp;<span class="k">mut</span> <span class="k">self</span>, kind: EventKind) -&gt; Result&lt;u64&gt; {</span><span><i>150</i>        <span class="k">self</span>.seq += <span class="n">1</span>;</span><span><i>151</i>        <span class="k">let</span> event = Event {</span><span><i>152</i>            seq: <span class="k">self</span>.seq,</span><span><i>153</i>            session_id: <span class="k">self</span>.session_id.<span class="f">clone</span>(),</span><span><i>154</i>            ts: Utc::<span class="f">now</span>(),</span><span><i>155</i>            kind,</span><span><i>156</i>        };</span><span><i>157</i></span><span class="on"><i>158</i>        <span class="k">let</span> line = serde_json::<span class="f">to_string</span>(&amp;event).<span class="f">context</span>(<span class="s">&quot;serializing event&quot;</span>)?;</span><span class="on"><i>159</i>        writeln!(<span class="k">self</span>.file, <span class="s">&quot;{line}&quot;</span>).<span class="f">context</span>(<span class="s">&quot;appending to event log&quot;</span>)?;</span><span><i>160</i>        <span class="k">self</span>.file.<span class="f">flush</span>().<span class="f">context</span>(<span class="s">&quot;flushing event log&quot;</span>)?;</span><span><i>161</i></span><span><i>162</i>        <span class="k">Ok</span>(event.seq)</span><span><i>163</i>    }</span></pre></figure>
+          <a class="link" href="https://github.com/Adithyaa71/bluee-harness">github.com/Adithyaa71/bluee-harness ↗</a>
+        </div>
+        <div class="case__stage">
+          <div class="win"><div class="win__bar"><i></i><i></i><i></i><span>bluee-harness</span><em class="num" data-fc>000</em></div>
+            <canvas class="case__cv"></canvas></div>
+          <div class="beats"><p class="beat" data-in="0" data-out="36">Every event lands in one JSONL file.</p><p class="beat" data-in="36" data-out="122">A reducer projects it into vectors and a graph.</p><p class="beat" data-in="124" data-out="148"><em>Delete everything derived.</em></p><p class="beat" data-in="150" data-out="999">Run the reducer again. It all comes back, from the log alone.</p></div>
+          <div class="case__rail"><i></i></div>
+        </div>
+      </div>
+    </article>
+    <article class="case" id="case-snarevec" data-film="snarevec" data-frames="240">
+      <div class="case__card">
+        <div class="case__spec">
+          <p class="label"><b>repo 3/4</b> · Python</p>
+          <h3 class="case__name">snarevec</h3>
+          <p class="case__pitch">Local capture and search for everything you read: pages, PDFs, code, images and audio, in separate vector spaces.</p>
+          <ul class="case__nums"><li><b class="num">3 indexes</b><span>one embedding model each</span></li><li><b class="num">7 backends</b><span>fastembed, CLIP, Ollama, Voyage and more</span></li><li><b class="num">5 targets</b><span>Qdrant, S3, SFTP, WebDAV, JSONL</span></li></ul>
+          <figure class="code"><figcaption><a href="https://github.com/Adithyaa71/snarevec/blob/main/daemon/main.py#L358-L364">snarevec/daemon/main.py<b>:358–364</b> ↗</a></figcaption><pre><span><i>358</i>@app.<span class="f">post</span>(<span class="s">&quot;/backends/probe-dims&quot;</span>)</span><span><i>359</i><span class="k">def</span> <span class="f">probe_dims</span>(body: ProbeDimsRequest) -&gt; ProbeDimsResult:</span><span><i>360</i><span class="c">    &quot;&quot;&quot;Embed one throwaway string and MEASURE the vector.</span></span><span><i>361</i><span class="c"></span></span><span class="on"><i>362</i><span class="c">    Deliberately not a lookup table: a table goes stale the moment a new model</span></span><span class="on"><i>363</i><span class="c">    ships, and being wrong here is worse than being slow. One real embedding is</span></span><span class="on"><i>364</i><span class="c">    the only trustworthy answer.&quot;&quot;&quot;</span></span></pre></figure>
+          <a class="link" href="https://github.com/Adithyaa71/snarevec">github.com/Adithyaa71/snarevec ↗</a>
+        </div>
+        <div class="case__stage">
+          <div class="win"><div class="win__bar"><i></i><i></i><i></i><span>snarevec</span><em class="num" data-fc>000</em></div>
+            <canvas class="case__cv"></canvas></div>
+          <div class="beats"><p class="beat" data-in="0" data-out="42">Text, code and images live in separate spaces.</p><p class="beat" data-in="42" data-out="120">A query flies into the one space it belongs to.</p><p class="beat" data-in="120" data-out="166">Nearest neighbours light up, filtered by group.</p><p class="beat" data-in="168" data-out="999">A model with the wrong vector width is <em>refused</em>. Width is measured, never typed.</p></div>
+          <div class="case__rail"><i></i></div>
+        </div>
+      </div>
+    </article>
+    <article class="case" id="case-nyx" data-film="nyx" data-frames="190">
+      <div class="case__card">
+        <div class="case__spec">
+          <p class="label"><b>repo 4/4</b> · Python</p>
+          <h3 class="case__name">nyx-nvim</h3>
+          <p class="case__pitch">Neovim, drivable by an AI agent over MCP: read the buffer, edit exact line ranges, keep LSP in charge.</p>
+          <ul class="case__nums"><li><b class="num">1 slice</b><span>the only place 1-indexed becomes 0-indexed</span></li><li><b class="num">~2k lines</b><span>of Python and Lua</span></li><li><b class="num">16 configs</b><span>Neovim plugins: LSP, treesitter, git, search</span></li></ul>
+          <figure class="code"><figcaption><a href="https://github.com/Adithyaa71/nyx-nvim/blob/main/mcp/mcp_client.py#L130-L141">nyx-nvim/mcp/mcp_client.py<b>:130–141</b> ↗</a></figcaption><pre><span><i>130</i><span class="k">def</span> <span class="f">edit_buffer</span>(start_line: int, end_line: int, new_lines: list[str], path: str = <span class="k">None</span>) -&gt; <span class="k">None</span>:</span><span><i>131</i><span class="c">    &quot;&quot;&quot;</span></span><span><i>132</i><span class="c">    Replace lines [start_line, end_line] (1-indexed, inclusive) with new_lines.</span></span><span><i>133</i><span class="c">    Always read_buffer first to know exact line numbers.</span></span><span><i>134</i><span class="c">    &quot;&quot;&quot;</span></span><span><i>135</i>    log.<span class="f">info</span>(f<span class="s">&quot;edit_buffer lines={start_line}-{end_line} path={path}&quot;</span>)</span><span><i>136</i>    nvim = <span class="f">_get_nvim</span>()</span><span><i>137</i>    <span class="k">if</span> path:</span><span><i>138</i>        nvim.<span class="f">command</span>(f<span class="s">&quot;e {path}&quot;</span>)</span><span class="on"><i>139</i>    buf = nvim.current.buffer</span><span class="on"><i>140</i><span class="c">    # Convert to 0-indexed for nvim API</span></span><span><i>141</i>    buf[start_line - <span class="n">1</span> : end_line] = new_lines</span></pre></figure>
+          <a class="link" href="https://github.com/Adithyaa71/nyx-nvim">github.com/Adithyaa71/nyx-nvim ↗</a>
+        </div>
+        <div class="case__stage">
+          <div class="win"><div class="win__bar"><i></i><i></i><i></i><span>nyx-nvim</span><em class="num" data-fc>000</em></div>
+            <canvas class="case__cv"></canvas></div>
+          <div class="beats"><p class="beat" data-in="0" data-out="32">The agent reads the buffer first.</p><p class="beat" data-in="32" data-out="98">It asks for lines 12–14: 1-indexed, inclusive.</p><p class="beat" data-in="98" data-out="150">The bridge converts exactly once: <code>buf[12 - 1 : 14]</code>.</p><p class="beat" data-in="152" data-out="999">The edit lands, then <code>:w</code>. On disk, where git can see it.</p></div>
+          <div class="case__rail"><i></i></div>
+        </div>
+      </div>
+    </article>
   </div>
 </section>
 
-<section class="film film--bluee" data-film="bluee" data-frames="210" aria-label="bluee-harness">
-  <div class="film__pin">
-    <canvas class="film__cv"></canvas>
-    <div class="film__shade"></div>
-    <div class="cap cap--title" data-in="0" data-out="34"><p class="cap__no">02</p><h2>bluee<br>harness</h2><p>An assistant harness whose memory is derived from one log. Rust, MCP.</p></div>
-    <div class="cap" data-in="36" data-out="122"><p>Every event is appended to one JSONL file. <b>Nothing is ever rewritten.</b> A reducer turns it into vectors and a graph.</p></div>
-    <div class="cap" data-in="124" data-out="148"><p class="cap__big">Delete everything derived.</p></div>
-    <div class="cap" data-in="150" data-out="211"><p>Run the reducer again. It all comes back, from the log alone. "Why did it do that?" is answered by reading the log.</p><a class="cap__src" href="https://github.com/Adithyaa71/bluee-harness">github.com/Adithyaa71/bluee-harness ↗</a></div>
+<section class="sec sec--stack" id="stack" aria-labelledby="stack-h">
+  <div class="sec__head">
+    <p class="label"><b>04</b> &middot; How it connects</p>
+    <h2 class="h2" id="stack-h">One stack, <em>four</em> parts.</h2>
+    <p class="lede">Each repo stands alone. Together they give an agent hands, an editor, a memory and a record of what it did.</p>
+  </div>
+  <div class="stk-stage">
+    <svg class="stk-svg stk-svg--wide" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Diagram: an AI agent connected to kratos, nyx-nvim, snarevec and bluee-harness. The four projects connect only to the agent, not to each other."><g class="stk-edges"><path class="stk-edge" data-k="kratos" d="M510,276 C510,150 440,100 320,100"/><path class="stk-edge" data-k="nyx-nvim" d="M690,276 C690,150 760,100 880,100"/><path class="stk-edge" data-k="snarevec" d="M510,364 C510,490 440,540 320,540"/><path class="stk-edge" data-k="bluee-harness" d="M690,364 C690,490 760,540 880,540"/></g><g class="stk-elabels"><text class="stk-elabel" data-k="kratos" x="336" y="84" text-anchor="start">MCP (kratos-mcp)</text><text class="stk-elabel" data-k="nyx-nvim" x="864" y="84" text-anchor="end">MCP (pynvim bridge)</text><text class="stk-elabel" data-k="snarevec" x="336" y="562" text-anchor="start">local HTTP API</text><text class="stk-elabel" data-k="bluee-harness" x="864" y="562" text-anchor="end">hosts the agent</text></g><g class="stk-agent"><rect class="stk-card stk-card--agent" x="470" y="276" width="260" height="88" rx="12"/><text class="stk-agent-name" x="600" y="316" text-anchor="middle">AI agent</text><text class="stk-agent-sub" x="600" y="342" text-anchor="middle">any MCP client, e.g. Claude Code</text></g><a class="stk-node" data-k="kratos" href="https://github.com/Adithyaa71/kratos" target="_blank" rel="noopener" aria-label="kratos on GitHub: hands: acts on Windows apps, proves the screen changed"><g><rect class="stk-card" x="20" y="48" width="300" height="104" rx="12"/><text class="stk-name" x="40" y="84">kratos</text><text class="stk-role" x="40" y="110">hands: acts on Windows apps,</text><text class="stk-role" x="40" y="130">proves the screen changed</text></g></a><a class="stk-node" data-k="nyx-nvim" href="https://github.com/Adithyaa71/nyx-nvim" target="_blank" rel="noopener" aria-label="nyx-nvim on GitHub: editor: reads and edits code in Neovim, with LSP"><g><rect class="stk-card" x="880" y="48" width="300" height="104" rx="12"/><text class="stk-name" x="900" y="84">nyx-nvim</text><text class="stk-role" x="900" y="110">editor: reads and edits code in</text><text class="stk-role" x="900" y="130">Neovim, with LSP</text></g></a><a class="stk-node" data-k="snarevec" href="https://github.com/Adithyaa71/snarevec" target="_blank" rel="noopener" aria-label="snarevec on GitHub: recall: searches what you've read, locally"><g><rect class="stk-card" x="20" y="488" width="300" height="104" rx="12"/><text class="stk-name" x="40" y="524">snarevec</text><text class="stk-role" x="40" y="550">recall: searches what you've</text><text class="stk-role" x="40" y="570">read, locally</text></g></a><a class="stk-node" data-k="bluee-harness" href="https://github.com/Adithyaa71/bluee-harness" target="_blank" rel="noopener" aria-label="bluee-harness on GitHub: the loop and its memory: runs the agent, keeps an append-only log"><g><rect class="stk-card" x="880" y="488" width="300" height="104" rx="12"/><text class="stk-name" x="900" y="524">bluee-harness</text><text class="stk-role" x="900" y="550">the loop and its memory: runs</text><text class="stk-role" x="900" y="570">the agent, keeps an append-only log</text></g></a><g class="stk-dots"><circle class="stk-dot" data-k="kratos" r="5" cx="0" cy="0"/><circle class="stk-dot" data-k="nyx-nvim" r="5" cx="0" cy="0"/><circle class="stk-dot" data-k="snarevec" r="5" cx="0" cy="0"/><circle class="stk-dot" data-k="bluee-harness" r="5" cx="0" cy="0"/></g></svg>
+    <svg class="stk-svg stk-svg--tall" viewBox="0 0 390 730" preserveAspectRatio="xMidYMin meet" role="group" aria-label="Diagram: an AI agent connected to kratos, nyx-nvim, snarevec and bluee-harness. The four projects connect only to the agent, not to each other."><g class="stk-edges"><path class="stk-edge" data-k="kratos" d="M94,80 V192 Q94,206 108,206 H130"/><path class="stk-edge" data-k="nyx-nvim" d="M76,80 V342 Q76,356 90,356 H130"/><path class="stk-edge" data-k="snarevec" d="M58,80 V492 Q58,506 72,506 H130"/><path class="stk-edge" data-k="bluee-harness" d="M40,80 V642 Q40,656 54,656 H130"/></g><g class="stk-elabels"><text class="stk-elabel" data-k="kratos" x="130" y="138">MCP (kratos-mcp)</text><text class="stk-elabel" data-k="nyx-nvim" x="130" y="288">MCP (pynvim bridge)</text><text class="stk-elabel" data-k="snarevec" x="130" y="438">local HTTP API</text><text class="stk-elabel" data-k="bluee-harness" x="130" y="588">hosts the agent</text></g><g class="stk-agent"><rect class="stk-card stk-card--agent" x="24" y="16" width="342" height="64" rx="12"/><text class="stk-agent-name" x="195" y="46" text-anchor="middle">AI agent</text><text class="stk-agent-sub" x="195" y="66" text-anchor="middle">any MCP client, e.g. Claude Code</text></g><a class="stk-node" data-k="kratos" href="https://github.com/Adithyaa71/kratos" target="_blank" rel="noopener" aria-label="kratos on GitHub: hands: acts on Windows apps, proves the screen changed"><g><rect class="stk-card" x="130" y="150" width="246" height="112" rx="12"/><text class="stk-name" x="150" y="182">kratos</text><text class="stk-role" x="150" y="208">hands: acts on Windows</text><text class="stk-role" x="150" y="225">apps, proves the</text><text class="stk-role" x="150" y="242">screen changed</text></g></a><a class="stk-node" data-k="nyx-nvim" href="https://github.com/Adithyaa71/nyx-nvim" target="_blank" rel="noopener" aria-label="nyx-nvim on GitHub: editor: reads and edits code in Neovim, with LSP"><g><rect class="stk-card" x="130" y="300" width="246" height="112" rx="12"/><text class="stk-name" x="150" y="332">nyx-nvim</text><text class="stk-role" x="150" y="358">editor: reads and edits code</text><text class="stk-role" x="150" y="375">in Neovim, with LSP</text></g></a><a class="stk-node" data-k="snarevec" href="https://github.com/Adithyaa71/snarevec" target="_blank" rel="noopener" aria-label="snarevec on GitHub: recall: searches what you've read, locally"><g><rect class="stk-card" x="130" y="450" width="246" height="112" rx="12"/><text class="stk-name" x="150" y="482">snarevec</text><text class="stk-role" x="150" y="508">recall: searches what</text><text class="stk-role" x="150" y="525">you've read, locally</text></g></a><a class="stk-node" data-k="bluee-harness" href="https://github.com/Adithyaa71/bluee-harness" target="_blank" rel="noopener" aria-label="bluee-harness on GitHub: the loop and its memory: runs the agent, keeps an append-only log"><g><rect class="stk-card" x="130" y="600" width="246" height="112" rx="12"/><text class="stk-name" x="150" y="632">bluee-harness</text><text class="stk-role" x="150" y="658">the loop and its memory:</text><text class="stk-role" x="150" y="675">runs the agent, keeps an</text><text class="stk-role" x="150" y="692">append-only log</text></g></a><g class="stk-dots"><circle class="stk-dot" data-k="kratos" r="5" cx="0" cy="0"/><circle class="stk-dot" data-k="nyx-nvim" r="5" cx="0" cy="0"/><circle class="stk-dot" data-k="snarevec" r="5" cx="0" cy="0"/><circle class="stk-dot" data-k="bluee-harness" r="5" cx="0" cy="0"/></g></svg>
   </div>
 </section>
 
-<section class="film film--snarevec" data-film="snarevec" data-frames="240" aria-label="snarevec">
-  <div class="film__pin">
-    <canvas class="film__cv"></canvas>
-    <div class="film__shade"></div>
-    <div class="cap cap--title" data-in="0" data-out="40"><p class="cap__no">03</p><h2>snarevec</h2><p>Local capture and search for everything you read. Python.</p></div>
-    <div class="cap" data-in="42" data-out="118"><p>Text, code and images live in <b>separate spaces</b>, one embedding model each. Vectors from different models never mix.</p></div>
-    <div class="cap" data-in="120" data-out="166"><p>A query searches only the space it belongs to, filtered by group and modality.</p></div>
-    <div class="cap" data-in="168" data-out="241"><p>Vector width is <em>measured</em>, never typed. A model that returns the wrong width is refused at the door: a real 1024-vs-768 bug, fixed for good.</p><a class="cap__src" href="https://github.com/Adithyaa71/snarevec">github.com/Adithyaa71/snarevec ↗</a></div>
-  </div>
-</section>
-
-<section class="film film--nyx" data-film="nyx" data-frames="190" aria-label="nyx-nvim">
-  <div class="film__pin">
-    <canvas class="film__cv"></canvas>
-    <div class="film__shade"></div>
-    <div class="cap cap--title" data-in="0" data-out="30"><p class="cap__no">04</p><h2>nyx<br>nvim</h2><p>Neovim, drivable by an AI agent over MCP. Python.</p></div>
-    <div class="cap" data-in="32" data-out="96"><p>The agent reads the buffer first. <b>It never edits a line number it guessed.</b></p></div>
-    <div class="cap" data-in="98" data-out="150"><p>People count lines from 1. The editor counts from 0. The bridge converts <em>exactly once</em>: <code>buf[start - 1 : end]</code>.</p></div>
-    <div class="cap" data-in="152" data-out="191"><p>The edit lands, then <code>:w</code>. On disk, where git can see it.</p><a class="cap__src" href="https://github.com/Adithyaa71/nyx-nvim">github.com/Adithyaa71/nyx-nvim ↗</a></div>
-  </div>
-</section>
-
-<!-- S7 · how I work: four principles fall and stack -->
+<!-- 05 · how I work: four principles fall and stack -->
 <section class="how" id="how" aria-label="How I work">
   <div class="how__pin">
-    <h2 class="how__h">How I work</h2>
+    <div class="how__head"><p class="label"><b>05</b> · How I work</p><h2 class="h2">Every rule has a <em>line number</em>.</h2></div>
     <div class="how__world">
       <a class="slab" href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-decide/src/lib.rs#L83"><b>Gate on the weakest signal.</b><span>kratos-decide/src/lib.rs:83</span></a>
-      <a class="slab" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/reduce.rs#L1"><b>Derive state. Never write it twice.</b><span>bluee-harness/src/reduce.rs:1</span></a>
-      <a class="slab" href="https://github.com/Adithyaa71/snarevec/blob/main/daemon/main.py#L358"><b>Measure it. Don't type it.</b><span>snarevec/daemon/main.py:358</span></a>
+      <a class="slab" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/eventlog.rs#L149"><b>Derive state. Never write it twice.</b><span>bluee-harness/src/eventlog.rs:149</span></a>
+      <a class="slab" href="https://github.com/Adithyaa71/snarevec/blob/main/daemon/main.py#L358"><b>Measure it. Don’t type it.</b><span>snarevec/daemon/main.py:358</span></a>
       <a class="slab" href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-broker/src/act.rs#L850"><b>Refuse rather than guess.</b><span>kratos-broker/src/act.rs:850</span></a>
     </div>
     <div class="limits">
-      <p class="limits__k">Known limits, in the repos' own words</p>
-      <p><q>Dense-only retrieval … is expected to do badly on exact-identifier queries.</q> <a href="https://github.com/Adithyaa71/snarevec/blob/main/benchmark/README.md#L9">snarevec</a></p>
-      <p><q>Cost of that choice: rebuild time grows with the log.</q> <a href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/reduce.rs#L12">bluee</a></p>
-      <p><q>Status: not run</q>: kratos's four real-task runs are written and waiting. <a href="https://github.com/Adithyaa71/kratos/blob/main/docs/real-tasks.md#L15">kratos</a></p>
+      <p class="label">Known limits, in the repos’ own words</p>
+      <p><q>Dense-only retrieval … is expected to do badly on exact-identifier queries.</q> <a class="link" href="https://github.com/Adithyaa71/snarevec/blob/main/benchmark/README.md#L9">snarevec</a></p>
+      <p><q>Cost of that choice: rebuild time grows with the log.</q> <a class="link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/reduce.rs#L12">bluee-harness</a></p>
+      <p><q>Status: not run</q>: kratos’s four real-task runs are written and waiting. <a class="link" href="https://github.com/Adithyaa71/kratos/blob/main/docs/real-tasks.md#L15">kratos</a></p>
     </div>
   </div>
 </section>
 
-<!-- S8 · the repos, as an index; the film still follows the cursor -->
-<section class="idx" aria-label="The four repositories">
-  <h2 class="idx__h">Read the source.</h2>
-  <p class="idx__p">All four are public. Every claim on this page links to a line.</p>
-  <ul class="idx__list">
-    <li><a href="https://github.com/Adithyaa71/kratos" data-img="frames/kratos/l/0236.webp"><span class="idx__n">01</span><b>kratos</b><span class="idx__d">Desktop control for AI agents: a refusal gate and evidence before success.</span><span class="idx__l">Rust</span><i>↗</i></a></li>
-    <li><a href="https://github.com/Adithyaa71/bluee-harness" data-img="frames/bluee/l/0205.webp"><span class="idx__n">02</span><b>bluee-harness</b><span class="idx__d">An assistant whose memory is a projection of one append-only log.</span><span class="idx__l">Rust</span><i>↗</i></a></li>
-    <li><a href="https://github.com/Adithyaa71/snarevec" data-img="frames/snarevec/l/0150.webp"><span class="idx__n">03</span><b>snarevec</b><span class="idx__d">Local capture and search: three indexes, one embedding model each.</span><span class="idx__l">Python</span><i>↗</i></a></li>
-    <li><a href="https://github.com/Adithyaa71/nyx-nvim" data-img="frames/nyx/l/0175.webp"><span class="idx__n">04</span><b>nyx-nvim</b><span class="idx__d">Neovim, drivable by an agent over MCP.</span><span class="idx__l">Python</span><i>↗</i></a></li>
-  </ul>
-  <div class="idx__peek" aria-hidden="true"><img alt="" src="frames/kratos/l/0236.webp"></div>
-</section>
-
-<!-- S9 · contact -->
+<!-- 06 · contact -->
 <section class="hi" id="contact" aria-label="Contact">
-  <p class="hi__k"><span class="dot"></span>Available for freelance and contract work</p>
-  <h2 class="hi__h">Let's build something that has to be <em>right</em>.</h2>
+  <p class="label"><b>06</b> · Contact</p>
+  <h2 class="disp hi__h">Let’s build something that has to be <em>right</em>.</h2>
   <div class="hi__row">
     <a class="mail" href="mailto:adityaummadi@gmail.com?subject=Project%20brief"><span>adityaummadi@gmail.com</span><i>→</i></a>
-    <button class="copy" type="button" data-copy="adityaummadi@gmail.com">Copy</button>
+    <button class="chip copy" type="button" data-copy="adityaummadi@gmail.com">Copy address</button>
   </div>
   <ol class="steps">
-    <li><b>A short call.</b> What has to be true when it's done, and how we'll check it.</li>
+    <li><b>A short call.</b> What has to be true when it’s done, and how we’ll check it.</li>
     <li><b>A written scope.</b> Deliverables, acceptance tests and a fixed price, before any code.</li>
     <li><b>Evidence at handoff.</b> Source, tests that pass on your machine, and the known limits.</li>
   </ol>
@@ -152,6 +315,8 @@
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
 <script src="js/physics.js?v=6" defer></script>
-<script src="js/site.js?v=10" defer></script>
+<script src="js/site.js?v=12" defer></script>
+<script src="js/skills.js?v=2" defer></script>
+<script src="js/stack.js?v=1" defer></script>
 </body>
 </html>

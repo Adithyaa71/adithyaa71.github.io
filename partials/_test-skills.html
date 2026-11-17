@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>skills test</title>
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/skills.css">
+</head>
+<body>
+<div style="height:60vh"></div>
+<section class="sec sec--skills" id="skills">
+  <div class="wrap sk">
+    <div class="sk__side">
+      <div class="sec__head sk__head">
+        <p class="label"><b>02</b> · Skills</p>
+        <h2 class="h2">What I can <em>build</em> for you.</h2>
+        <p class="lede">Each skill below is backed by code you can open. Click any file to see the line.</p>
+      </div>
+      <div class="sk__stack">
+        <p class="label">stack used across the repos</p>
+        <ul class="sk__chips"><li class="chip">Rust</li><li class="chip">Python</li><li class="chip">Lua</li><li class="chip">JavaScript</li><li class="chip">tokio</li><li class="chip">Tauri</li><li class="chip">FastAPI</li><li class="chip">ONNX Runtime</li><li class="chip">fastembed</li><li class="chip">Kuzu</li><li class="chip">SQLite</li><li class="chip">Qdrant</li><li class="chip">pynvim</li><li class="chip">Neovim</li><li class="chip">MCP</li></ul>
+      </div>
+    </div>
+    <ol class="sk__list">
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">01</span>
+        <div class="sk__body">
+          <h3 class="h3">Agent safety &amp; desktop control</h3>
+          <p class="sk__desc">Agents that operate real Windows apps, refuse when unsure, and prove the screen changed.</p>
+          <ul class="sk__chips"><li class="chip">Windows UI Automation</li><li class="chip">screen-diff evidence</li><li class="chip">OCR + ONNX detection</li><li class="chip">confidence gating</li><li class="chip">kill switch</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-decide/src/lib.rs#L74" target="_blank" rel="noopener">kratos · crates/kratos-decide/src/lib.rs:74 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-native/src/uia.rs#L22" target="_blank" rel="noopener">kratos · crates/kratos-native/src/uia.rs:22 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-shot/src/lib.rs#L268" target="_blank" rel="noopener">kratos · crates/kratos-shot/src/lib.rs:268 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-gate/src/lib.rs#L39" target="_blank" rel="noopener">kratos · crates/kratos-gate/src/lib.rs:39 ↗</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">02</span>
+        <div class="sk__body">
+          <h3 class="h3">MCP integrations</h3>
+          <p class="sk__desc">Wiring tools and agents together over the Model Context Protocol.</p>
+          <ul class="sk__chips"><li class="chip">Rust MCP server</li><li class="chip">rmcp client</li><li class="chip">Python MCP tools</li><li class="chip">per-agent tool scoping</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/tree/main/crates/kratos-mcp" target="_blank" rel="noopener">kratos · crates/kratos-mcp ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/mcp.rs#L9" target="_blank" rel="noopener">bluee-harness · src/mcp.rs:9 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/nyx-nvim/blob/main/mcp/mcp_client.py#L59" target="_blank" rel="noopener">nyx-nvim · mcp/mcp_client.py:59 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/mcps/TOOL_REFERENCE.md" target="_blank" rel="noopener">bluee-harness · mcps/TOOL_REFERENCE.md ↗</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">03</span>
+        <div class="sk__body">
+          <h3 class="h3">Agent harnesses</h3>
+          <p class="sk__desc">Tool-calling assistants with sub-agents, hooks and plans.</p>
+          <ul class="sk__chips"><li class="chip">streaming tool-call loop</li><li class="chip">scoped sub-agents</li><li class="chip">pre/post-tool hooks</li><li class="chip">plan tracking</li><li class="chip">tool search</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/agent.rs" target="_blank" rel="noopener">bluee-harness · src/agent.rs ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/subagents.rs#L47" target="_blank" rel="noopener">bluee-harness · src/subagents.rs:47 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/hooks.rs#L9" target="_blank" rel="noopener">bluee-harness · src/hooks.rs:9 ↗</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">04</span>
+        <div class="sk__body">
+          <h3 class="h3">Inspectable AI memory</h3>
+          <p class="sk__desc">Memory you can read, delete and rebuild, not a black box.</p>
+          <ul class="sk__chips"><li class="chip">append-only event log</li><li class="chip">reducer projections</li><li class="chip">embeddings + SQLite search</li><li class="chip">Kuzu graph</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/eventlog.rs#L149" target="_blank" rel="noopener">bluee-harness · src/eventlog.rs:149 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/reduce.rs#L188" target="_blank" rel="noopener">bluee-harness · src/reduce.rs:188 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/memory.rs" target="_blank" rel="noopener">bluee-harness · src/memory.rs ↗</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">05</span>
+        <div class="sk__body">
+          <h3 class="h3">Retrieval &amp; RAG pipelines</h3>
+          <p class="sk__desc">Turn pages, PDFs, code, images and audio into searchable local collections.</p>
+          <ul class="sk__chips"><li class="chip">4 chunking strategies</li><li class="chip">one model per index</li><li class="chip">OCR for scans</li><li class="chip">Whisper transcription</li><li class="chip">Qdrant / S3 / SFTP targets</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/blob/main/daemon/chunking.py#L38" target="_blank" rel="noopener">snarevec · daemon/chunking.py:38 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/tree/main/daemon/backends" target="_blank" rel="noopener">snarevec · daemon/backends ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/blob/main/daemon/ocr.py#L144" target="_blank" rel="noopener">snarevec · daemon/ocr.py:144 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/tree/main/daemon/targets" target="_blank" rel="noopener">snarevec · daemon/targets ↗</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">06</span>
+        <div class="sk__body">
+          <h3 class="h3">Browser extensions &amp; local services</h3>
+          <p class="sk__desc">Chrome extensions and localhost APIs that capture and process the web.</p>
+          <ul class="sk__chips"><li class="chip">Chrome MV3 extension</li><li class="chip">Readability extraction</li><li class="chip">FastAPI daemon</li><li class="chip">Rust native-messaging host</li><li class="chip">CDP browser control</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/blob/main/extension/manifest.json" target="_blank" rel="noopener">snarevec · extension/manifest.json ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/blob/main/daemon/main.py#L37" target="_blank" rel="noopener">snarevec · daemon/main.py:37 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/blob/main/packaging/host-rs/src/main.rs" target="_blank" rel="noopener">snarevec · packaging/host-rs/src/main.rs ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/bluee-harness/blob/main/src/browser.rs#L322" target="_blank" rel="noopener">bluee-harness · src/browser.rs:322 ↗</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">07</span>
+        <div class="sk__body">
+          <h3 class="h3">Editor tooling</h3>
+          <p class="sk__desc">Agents that edit code through Neovim, with LSP and git.</p>
+          <ul class="sk__chips"><li class="chip">pynvim RPC bridge</li><li class="chip">LSP definition/references</li><li class="chip">safe line-range edits</li><li class="chip">treesitter &amp; telescope</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/nyx-nvim/blob/main/mcp/mcp_client.py#L130" target="_blank" rel="noopener">nyx-nvim · mcp/mcp_client.py:130 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/nyx-nvim/blob/main/tools/internal/_lsp.py#L15" target="_blank" rel="noopener">nyx-nvim · tools/internal/_lsp.py:15 ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/nyx-nvim/blob/main/tools/refactor.py#L15" target="_blank" rel="noopener">nyx-nvim · tools/refactor.py:15 ↗</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="sk__row" data-sk-row>
+      <div class="sk__in">
+        <span class="sk__idx">08</span>
+        <div class="sk__body">
+          <h3 class="h3">Measurement &amp; shipping</h3>
+          <p class="sk__desc">Benchmarks with n and p95, installers, CI releases and docs.</p>
+          <ul class="sk__chips"><li class="chip">Rust benchmark crate</li><li class="chip">retrieval-quality harness</li><li class="chip">Windows installer</li><li class="chip">tag-triggered CI release</li><li class="chip">mkdocs site</li></ul>
+          <div class="sk__ev" data-sk-ev>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/blob/main/docs/benchmarks.md" target="_blank" rel="noopener">kratos · docs/benchmarks.md ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/kratos/blob/main/crates/kratos-bench/src/main.rs" target="_blank" rel="noopener">kratos · crates/kratos-bench/src/main.rs ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/blob/main/benchmark/README.md" target="_blank" rel="noopener">snarevec · benchmark/README.md ↗</a>
+            <a class="sk__link" href="https://github.com/Adithyaa71/snarevec/blob/main/.github/workflows/release.yml" target="_blank" rel="noopener">snarevec · .github/workflows/release.yml ↗</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    </ol>
+  </div>
+</section>
+
+<div style="height:70vh"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="../js/physics.js"></script>
+<script src="../js/skills.js"></script>
+</body>
+</html>

@@ -17,12 +17,12 @@ function hl(c, s, x, y, txt, P) {   // tiny python highlighter for the buffer
   if (s.trim().startsWith('#')) { txt(c, s, x, y, { size: 16, color: '#8b93a0' }); return; }
   while ((m = kw.exec(s))) { push(s.slice(last, m.index), P.bone); push(m[0], m[0] === 'min' ? P.cyan : P.sig); last = m.index + m[0].length; }
   push(s.slice(last), P.bone);
-  c.font = `400 ${16 * (window.FILM_TK || 1)}px "IBM Plex Mono"`; let xx = x;
+  c.font = `400 ${16 * (window.FILM_TK || 1)}px "Fragment Mono"`; let xx = x;
   out.forEach(([t, col]) => { txt(c, t, xx, y, { size: 16, color: /\d/.test(t) && col === P.bone ? P.bone : col }); xx += c.measureText(t).width; });
 }
 Film({
   frames: 190,
-  stage: { l: { x: 600, y: 150, w: 960 }, p: { x: 8, y: 600, w: 704 } },
+  stage: { l: { x: 90, y: 10, w: 1420 }, p: { x: 0, y: 227, w: 720 } },
   draw(c, f, U) {
     const { P, S, iv, rr, txt } = U;
     // ── the agent's side: MCP calls typing themselves

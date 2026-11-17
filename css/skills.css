@@ -1,0 +1,30 @@
+/* skills.css · section 02. Tokens come from base.css only. */
+.sec--skills .sk{display:grid; gap:clamp(40px,7vh,72px); align-items:start}
+.sec--skills .sk__head{margin:0 0 clamp(28px,4vh,40px)}
+.sec--skills .sk__stack{display:grid; gap:14px}
+.sec--skills .sk__chips{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px}
+.sec--skills .sk__chips .chip{white-space:normal}
+
+.sec--skills .sk__list{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+.sec--skills .sk__row{border-bottom:1px solid var(--line); padding:clamp(28px,4.5vh,44px) 0}
+.sec--skills .sk__in{display:grid; grid-template-columns:2.4em 1fr; gap:6px 18px; will-change:opacity}
+.sec--skills .sk__idx{font-family:var(--mono); font-size:var(--t-label); letter-spacing:.06em; color:var(--accent); padding-top:.7em}
+.sec--skills .sk__body{display:grid; gap:14px; min-width:0}
+.sec--skills .sk__desc{font-size:clamp(1rem,1.15vw,1.1rem); line-height:1.5; color:var(--ink2); max-width:36em}
+.sec--skills .sk__ev{display:flex; flex-direction:column; gap:6px; margin-top:6px; will-change:transform}
+.sec--skills .sk__stackline{font-family:var(--mono); font-size:13px; line-height:1.9; color:var(--ink3); max-width:30em}
+.sec--skills .sk__link{font-family:var(--mono); font-size:13px; line-height:1.5; color:var(--ink); overflow-wrap:anywhere; width:fit-content}
+.sec--skills .sk__link:hover,.sec--skills .sk__link:focus-visible{color:var(--accent)}
+
+@media (min-width:900px){
+  .sec--skills .sk{grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:clamp(48px,6vw,96px)}
+  .sec--skills .sk__side{position:sticky; top:clamp(72px,12vh,120px)}
+  .sec--skills .sk__list{border-top:0}
+  .sec--skills .sk__row:first-child{padding-top:0}
+}
+
+/* loop 3: proof reads as proof, not as footnotes */
+.sec--skills .chip{color:var(--ink); border-color:var(--line2); font-size:12.5px}
+.sec--skills .sk__desc{color:var(--ink)}
+.sec--skills .sk__link{font-size:13.5px; border-bottom:1px solid var(--line2); padding-bottom:1px}
+.sec--skills .sk__link:hover{border-color:var(--accent)}

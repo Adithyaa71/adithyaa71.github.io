@@ -13,19 +13,22 @@
   const iv = (f, a, b) => M.clamp((f - a) / (b - a));
   const ss = (x) => x * x * (3 - 2 * x);
   function rr(c, x, y, w, h, r) { c.beginPath(); c.roundRect(x, y, w, h, r); }
-  function txt(c, s, x, y, { size = 14, font = 'IBM Plex Mono', weight = 400, color = P.bone, align = 'left', base = 'alphabetic', alpha = 1 } = {}) {
-    c.save(); c.globalAlpha = M.clamp(c.globalAlpha * alpha); size *= window.FILM_TK || 1; c.font = `${weight} ${size}px "${font}"`; c.fillStyle = color; c.textAlign = align; c.textBaseline = base; c.fillText(s, x, y); c.restore();
+  function txt(c, s, x, y, { size = 14, font = 'Fragment Mono', weight = 400, color = P.bone, align = 'left', base = 'alphabetic', alpha = 1 } = {}) {
+    c.save(); c.globalAlpha = M.clamp(c.globalAlpha * alpha); size *= window.FILM_TK || 1;
+    // code is shown as typed: a non-zero letter-spacing turns off the font's -> and >= ligatures in Chrome's canvas
+    c.letterSpacing = '0.01px';
+    c.font = `${weight} ${size}px "${font}"`; c.fillStyle = color; c.textAlign = align; c.textBaseline = base; c.fillText(s, x, y); c.restore();
   }
 
   window.Film = function ({ frames, stage, draw, bg }) {
     const portrait = q.get('o') === 'p' || window.FILM_O === 'p';
-    const W = portrait ? 720 : 1600, H = portrait ? 1280 : 900;
+    const W = portrait ? 720 : 1600, H = portrait ? 900 : 900;   // landscape 16:9, portrait 4:5 (a card on a phone)
     window.composition = { width: W, height: H, fps: 30, durationFrames: frames };
     const cv = document.createElement('canvas'); cv.width = W; cv.height = H; (document.body || document.documentElement).appendChild(cv);
     const c = cv.getContext('2d');
     const st = (portrait ? stage.p : stage.l);                      // {x,y,w} in px; height follows the 1000×620 box
     const k = st.w / 1000;
-    window.FILM_TK = portrait ? 1.42 : 1.16;                         // type reads at real size: bigger than the layout box alone gives
+    window.FILM_TK = portrait ? 1.7 : 1.25;                         // type reads at real size: bigger than the layout box alone gives
     window.renderFrame = async (f) => {
       c.setTransform(1, 0, 0, 1, 0, 0);
       c.fillStyle = P.bg; c.fillRect(0, 0, W, H);
@@ -38,7 +41,7 @@
       c.fillStyle = 'rgba(236,232,223,.025)';
       for (let i = 0; i < 900; i++) c.fillRect(rnd() * W, rnd() * H, 1.4, 1.4);
     };
-    window.compositionReady = Promise.all(['400 14px "IBM Plex Mono"', '500 14px "IBM Plex Mono"', '500 14px "IBM Plex Sans"', '600 14px "IBM Plex Sans"', '800 40px "Big Shoulders Display"', '900 40px "Big Shoulders Display"']
+    window.compositionReady = Promise.all(['400 14px "Fragment Mono"', '500 14px "Switzer"', '600 14px "Switzer"', '300 40px "Newsreader"']
       .map((f) => document.fonts.load(f))).then(() => document.fonts.ready);
     // canvas alpha ignores out-of-range values instead of clamping them; clamp every assignment
     const d = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'globalAlpha');

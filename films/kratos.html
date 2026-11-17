@@ -43,7 +43,7 @@ function gate(c, f, x, y, rows, { P, S, rr, txt }, a) {
 }
 Film({
   frames: 240,
-  stage: { l: { x: 600, y: 150, w: 960 }, p: { x: 12, y: 600, w: 696 } },
+  stage: { l: { x: 90, y: 10, w: 1420 }, p: { x: 0, y: 227, w: 720 } },
   bg: (c, f, W, H, P) => {
     c.strokeStyle = 'rgba(236,232,223,.035)'; c.lineWidth = 1;
     for (let x = 0; x < W; x += 40) { c.beginPath(); c.moveTo(x + .5, 0); c.lineTo(x + .5, H); c.stroke(); }
@@ -52,8 +52,8 @@ Film({
   draw(c, f, U) {
     const { P, S, iv, rr, txt } = U;
     const bell = (a, b, c2, d2) => S(f, a, 'gentle') - S(f, c2, 'gentle');
-    const z = 1 + 0.2 * bell(46, 0, 124) + 0.1 * (S(f, 150, 'gentle') - S(f, 200, 'gentle')) + 0.06 * S(f, 222, 'gentle');
-    const fx = 900, fy = 300;
+    const z = 1 + 0.05 * bell(46, 0, 124) + 0.03 * (S(f, 150, 'gentle') - S(f, 200, 'gentle'));
+    const fx = 760, fy = 330;
     c.translate(fx, fy); c.scale(z, z); c.translate(-fx, -fy);
     // the desktop the agent is driving
     const enter = S(f, 0, 'gentle');
@@ -90,11 +90,11 @@ Film({
     const cur = cursorAt(f, S);
     const hoverDel = f > 50 && f < 128, hoverSend = f > 150;
     rr(c, DEL.x, DEL.y, DEL.w, DEL.h, 10); c.strokeStyle = hoverDel ? P.red : 'rgba(255,90,78,.5)'; c.lineWidth = hoverDel ? 2 : 1; c.stroke(); c.lineWidth = 1;
-    txt(c, 'Delete all', DEL.x + 70, DEL.y + 29, { size: 14, align: 'center', color: '#FF8D85', font: 'IBM Plex Sans', weight: 500 });
+    txt(c, 'Delete all', DEL.x + 70, DEL.y + 29, { size: 14, align: 'center', color: '#FF8D85', font: 'Switzer', weight: 500 });
     const pr = f > 186 && f < 196 ? 0.95 : 1;
     c.save(); c.translate(SEND.x + 70, SEND.y + 23); c.scale(pr, pr);
     rr(c, -70, -23, SEND.w, SEND.h, 10); c.fillStyle = hoverSend ? P.sig : 'rgba(255,209,46,.85)'; c.fill();
-    txt(c, 'Send', 0, 6, { size: 15, align: 'center', color: '#141414', font: 'IBM Plex Sans', weight: 600 });
+    txt(c, 'Send', 0, 6, { size: 15, align: 'center', color: '#141414', font: 'Switzer', weight: 600 });
     c.restore();
     c.restore();
 

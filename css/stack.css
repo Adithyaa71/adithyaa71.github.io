@@ -1,0 +1,24 @@
+/* stack.css · section 04. Tokens come from base.css only. */
+.sec--stack{padding-bottom:0}
+.stk-stage{height:100vh; height:100svh; display:flex; align-items:center; justify-content:center; max-width:var(--max); margin:0 auto; padding:24px 0; width:100%}
+.stk-svg{display:block; width:100%; min-width:0; max-width:100%; height:auto; max-height:calc(100svh - 48px); overflow:visible}
+.stk-svg--tall{display:none}
+@media (max-width:760px){
+  .stk-svg--wide{display:none}
+  .stk-svg--tall{display:block}
+  .stk-stage{align-items:flex-start; padding-top:8px}
+}
+.stk-card{fill:var(--surface); stroke:var(--line2); stroke-width:1}
+.stk-card--agent{stroke:var(--accent); stroke-width:1.5}
+.stk-node:hover .stk-card,.stk-node:focus-visible .stk-card{stroke:var(--accent)}
+.stk-node:focus-visible{outline:none}
+.stk-name{font-family:var(--serif); font-weight:400; font-size:25px; letter-spacing:-.02em; fill:var(--ink)}
+.stk-role{font-family:var(--sans); font-size:14px; fill:var(--ink2)}
+.stk-agent-name{font-family:var(--serif); font-weight:300; font-size:30px; letter-spacing:-.02em; fill:var(--ink)}
+.stk-agent-sub{font-family:var(--mono); font-size:12px; letter-spacing:.02em; fill:var(--ink3)}
+.stk-edge{fill:none; stroke:var(--ink3); stroke-width:1.5; stroke-linecap:round}
+.stk-elabel{font-family:var(--mono); font-size:13px; letter-spacing:.02em; fill:var(--cyan); paint-order:stroke; stroke:var(--bg); stroke-width:6px; stroke-linejoin:round}
+.stk-dot{fill:var(--accent)}
+.stk-svg--tall .stk-name{font-size:23px}
+.stk-svg--tall .stk-role{font-size:13px}
+.stk-svg--tall .stk-elabel{font-size:12px}
